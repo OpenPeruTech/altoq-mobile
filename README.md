@@ -1,50 +1,77 @@
-# Welcome to your Expo app 👋
+# My Expo App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Este proyecto fue creado con **Expo** usando:
 
-## Get started
+```bash
+npx create-expo-app my-app
+```
 
-1. Install dependencies
+## 🚀 Cómo iniciar el proyecto
 
+1. Clona este repositorio o crea un nuevo proyecto con Expo.
+2. Instala dependencias (ya vienen instaladas al crear el proyecto):
    ```bash
    npm install
    ```
-
-2. Start the app
-
+3. Inicia el servidor de desarrollo:
    ```bash
    npx expo start
    ```
+4. Escanea el código QR con la app de **Expo Go** (disponible en iOS y Android).
 
-In the output, you'll find options to open the app in a
+## 📂 Estructura del proyecto
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+YoElijo/
+│── .expo/ # Archivos internos de Expo (no modificar)
+│── .vscode/ # Configuración del editor VSCode
+│── app/ # Punto de entrada de la aplicación (screens, rutas, navegación)
+│── assets/ # Archivos estáticos (imágenes, fuentes, íconos, sonidos)
+│ ├── fonts/ # Fuentes personalizadas
+│ └── images/ # Imágenes de la app
+│
+│── components/ # Componentes reutilizables de UI
+│ └── ui/ # Subcarpeta con componentes de interfaz (botones, vistas, etc.)
+│
+│── constants/ # Constantes globales (colores, estilos, configuraciones)
+│ └── Colors.ts
+│
+│── hooks/ # Custom hooks para lógica reutilizable
+│ ├── useColorScheme.ts # Detecta tema claro/oscuro
+│ ├── useColorScheme.web.ts # Variante para web
+│ └── useThemeColor.ts # Hook para aplicar colores del tema
+│
+│── node_modules/ # Dependencias instaladas con npm
+│── scripts/ # Scripts utilitarios o de configuración
+│
+│── .gitignore # Archivos/carpetas ignorados por git
+│── app.json # Configuración principal de Expo
+│── eslint.config.js # Reglas de linting (formato de código)
+│── expo-env.d.ts # Tipos de Expo (TypeScript)
+│── package.json # Dependencias y scripts del proyecto
+│── tsconfig.json # Configuración de TypeScript
+│── README.md # Documentación general del proyecto
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 📱 Requisitos
 
-## Learn more
+- Tener instalado [Node.js](https://nodejs.org/) (v18 o superior).
+- Tener instalada la app **Expo Go** en tu celular.
+- (Opcional) Instalar [Expo CLI](https://docs.expo.dev/) globalmente:
+  ```bash
+  npm install -g expo-cli
+  ```
 
-To learn more about developing your project with Expo, look at the following resources:
+## 🛠️ Comandos útiles
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- `npx expo start` → Inicia el proyecto.
+- `npm run android` → Corre en emulador Android (si está disponible).
+- `npm run ios` → Corre en simulador iOS (solo MacOS).
+- `npm run web` → Corre en navegador web.
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## ✅ Buenas prácticas
+1. Mantener **componentes reutilizables** dentro de `components/`.
+2. Centralizar **colores, estilos y constantes** en `constants/`.
+3. Usar **hooks** para separar lógica de negocio de la UI.
+4. Mantener `assets/` solo para recursos estáticos.
+5. Documentar cambios importantes en este archivo.
