@@ -1,0 +1,1 @@
+export { AvatarPlaceholder } from "./AvatarPlaceholder";
