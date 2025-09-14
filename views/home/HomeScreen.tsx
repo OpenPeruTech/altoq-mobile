@@ -1,6 +1,8 @@
 import { AvatarPlaceholder } from "@/components/ui/AvatarPlaceholder";
+import authorityData from "@/views/home/data/authorityData.json";
+import candidatesData from "@/views/home/data/candidates.json";
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -9,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { CandidateCard } from "../candidates/components/CandidateCard";
 
 export const HomeScreen: React.FC = () => {
   const currentDate = new Date();
@@ -22,24 +25,15 @@ export const HomeScreen: React.FC = () => {
   const months = Math.floor(daysLeft / 30);
   const days = daysLeft % 30;
   const hours = currentDate.getHours();
+  const [currentCandidateIndex, setCurrentCandidateIndex] = useState(0);
 
-  const authorityData = [
-    { title: "Presidente", icon: "person", count: 1, color: "#ff6b6b" },
-    { title: "Vicepresidentes", icon: "people", count: 2, color: "#4ecdc4" },
-    { title: "Senadores", icon: "people-circle", count: 60, color: "#45b7d1" },
-    {
-      title: "Diputados",
-      icon: "people-outline",
-      count: 130,
-      color: "#f9ca24",
-    },
-    {
-      title: "Parlamentos Andinos",
-      icon: "library",
-      count: 5,
-      color: "#6c5ce7",
-    },
-  ];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentCandidateIndex((prev) => (prev + 1) % candidatesData.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -101,14 +95,22 @@ export const HomeScreen: React.FC = () => {
 
           <View style={styles.authoritiesGrid}>
             {authorityData.map((authority, index) => (
-              <TouchableOpacity key={index} style={styles.authorityCard}>
+              <TouchableOpacity
+                key={index}
+                style={[
+                  styles.authorityCard,
+                  { width: index < 2 ? "48%" : "30%" }, // 🔹 2 arriba, 3 abajo
+                ]}
+              >
                 <Ionicons
                   name={authority.icon as any}
-                  size={24}
+                  size={22}
                   color={authority.color}
                 />
-                <Text style={styles.authorityCount}>{authority.count}</Text>
-                <Text style={styles.authorityTitle}>{authority.title}</Text>
+                <View style={styles.textContainer}>
+                  <Text style={styles.authorityCount}>{authority.count}</Text>
+                  <Text style={styles.authorityTitle}>{authority.title}</Text>
+                </View>
               </TouchableOpacity>
             ))}
           </View>
@@ -117,31 +119,18 @@ export const HomeScreen: React.FC = () => {
         {/* Popular Candidates */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Los más populares</Text>
+          <CandidateCard {...candidatesData[currentCandidateIndex]} />
 
-          <View style={styles.candidateCard}>
-            <AvatarPlaceholder
-              name="Postulante 1"
-              size={50}
-              backgroundColor="#e53e3e"
-            />
-            <View style={styles.candidateInfo}>
-              <Text style={styles.candidateName}>Postulante 1</Text>
-              <Text style={styles.candidateParty}>Partido Político 1</Text>
-              <Text style={styles.candidateDetails}>
-                Lorem ipsum Lorem ipsum
-              </Text>
-              <Text style={styles.candidateDetails}>
-                Lorem ipsum Lorem ipsum
-              </Text>
-              <Text style={styles.candidateDetails}>
-                Lorem ipsum Lorem ipsum
-              </Text>
-              <Text style={styles.candidateDetails}>Lorem lorem</Text>
-            </View>
-            <View style={styles.percentageContainer}>
-              <Text style={styles.percentage}>12%</Text>
-              <Ionicons name="trending-up" size={16} color="#4CAF50" />
-            </View>
+          <View style={styles.paginationDots}>
+            {candidatesData.map((_, idx) => (
+              <View
+                key={idx}
+                style={[
+                  styles.dot,
+                  currentCandidateIndex === idx ? styles.activeDot : null,
+                ]}
+              />
+            ))}
           </View>
         </View>
 
@@ -242,29 +231,36 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   authorityCard: {
-    width: "48%",
     backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 16,
+    borderRadius: 10,
+    padding: 10,
+    flexDirection: "row",
     alignItems: "center",
     marginBottom: 12,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  textContainer: {
+    flex: 1,
+    alignItems: "center",
+    marginLeft: 8,
   },
   authorityCount: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: "bold",
     color: "#333",
-    marginVertical: 4,
-  },
-  authorityTitle: {
-    fontSize: 12,
-    color: "#666",
     textAlign: "center",
   },
+  authorityTitle: {
+    fontSize: 11,
+    color: "#666",
+    textAlign: "center",
+    marginTop: 2,
+  },
+
   candidateCard: {
     backgroundColor: "#fff",
     borderRadius: 12,
@@ -277,35 +273,75 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
-  candidateInfo: {
+
+  leftContainer: {
+    width: 100,
+    alignItems: "center",
+  },
+
+  rightContainer: {
     flex: 1,
     marginLeft: 12,
   },
+
   candidateName: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#333",
-    marginBottom: 2,
+    marginTop: 8,
   },
+
   candidateParty: {
     fontSize: 14,
     color: "#666",
     marginBottom: 8,
+    textAlign: "center",
   },
+
+  percentageContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 4,
+  },
+
+  percentage: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#4CAF50",
+    marginRight: 4,
+  },
+
   candidateDetails: {
     fontSize: 12,
     color: "#999",
     lineHeight: 16,
   },
-  percentageContainer: {
-    alignItems: "center",
+
+  divider: {
+    width: 1,
+    backgroundColor: "#e0e0e0",
+    marginHorizontal: 12,
+    alignSelf: "stretch",
   },
-  percentage: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#4CAF50",
-    marginBottom: 4,
+  paginationDots: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 10,
   },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: "#f3c6c6",
+    marginHorizontal: 4,
+  },
+  activeDot: {
+    backgroundColor: "#e53e3e",
+    width: 20,
+    borderRadius: 5,
+  },
+
   bottomSpacing: {
     height: 100,
   },
