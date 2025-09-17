@@ -1,0 +1,27 @@
+[
+  { "title": "Presidente", "icon": "person", "count": 1, "color": "#ff6b6b" },
+  {
+    "title": "Vicepresidentes",
+    "icon": "people",
+    "count": 2,
+    "color": "#4ecdc4"
+  },
+  {
+    "title": "Senadores",
+    "icon": "people-circle",
+    "count": 60,
+    "color": "#45b7d1"
+  },
+  {
+    "title": "Diputados",
+    "icon": "people-outline",
+    "count": 130,
+    "color": "#f9ca24"
+  },
+  {
+    "title": "Parlamentos Andinos",
+    "icon": "library",
+    "count": 5,
+    "color": "#6c5ce7"
+  }
+]

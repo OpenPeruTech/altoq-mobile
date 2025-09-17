@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Postulante 1",
+    "party": "Partido Político 1",
+    "percentage": 12,
+    "details": "Lorem ipsum Lorem ipsum",
+    "color": "#e53e3e"
+  },
+  {
+    "name": "Postulante 2",
+    "party": "Partido Político 2",
+    "percentage": 8,
+    "details": "Detalles del candidato 2",
+    "color": "#4ecdc4"
+  },
+  {
+    "name": "Postulante 3",
+    "party": "Partido Político 3",
+    "percentage": 15,
+    "details": "Detalles del candidato 3",
+    "color": "#45b7d1"
+  },
+  {
+    "name": "Postulante 4",
+    "party": "Partido Político 4",
+    "percentage": 20,
+    "details": "Detalles del candidato 4",
+    "color": "#f9ca24"
+  },
+  {
+    "name": "Postulante 5",
+    "party": "Partido Político 5",
+    "percentage": 5,
+    "details": "Detalles del candidato 5",
+    "color": "#6c5ce7"
+  }
+]
