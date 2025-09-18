@@ -1,17 +1,40 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import "react-native-reanimated";
 import "../../global.css";
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+function InitialLayout() {
+  useEffect(() => {
+    const timeout = setTimeout(async () => {
+      const hasSeenOnboarding = await AsyncStorage.getItem("hasSeenOnboarding");
+      if (hasSeenOnboarding) {
+        router.replace("/(tabs)/Home");
+      } else {
+        router.replace("/onboarding");
+      }
+    }, 100);
 
+    return () => clearTimeout(timeout);
+  }, []);
+
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        headerBackButtonDisplayMode: "minimal",
+      }}
+    />
+  );
+}
 export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require("../../assets/fonts/SpaceMono-Regular.ttf"),
+    medium: require("../../assets/fonts/HelveticaNowDisplay-Medium.ttf"),
+    extraBold: require("../../assets/fonts/HelveticaNowDisplay-ExtraBold.ttf"),
+    Bold: require("../../assets/fonts/HelveticaNowDisplay-Bold.ttf"),
   });
 
   useEffect(() => {
@@ -24,14 +47,5 @@ export default function RootLayout() {
     return null;
   }
 
-  return (
-    <>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </>
-  );
+  return <InitialLayout />;
 }
