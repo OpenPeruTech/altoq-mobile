@@ -5,11 +5,8 @@ import { Platform } from "react-native";
 import { HapticTab } from "@/components/HapticTab";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import TabBarBackground from "@/components/ui/TabBarBackground";
-import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
@@ -38,7 +35,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="Home"
         options={{
           title: "",
           tabBarIcon: ({ color, focused }) => (
@@ -51,7 +48,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="candidates"
+        name="Candidates"
         options={{
           title: "",
           tabBarIcon: ({ color, focused }) => (
