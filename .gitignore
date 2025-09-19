@@ -2,6 +2,11 @@
 
 # dependencies
 node_modules/
+# Ignorar builds de Android
+android/app/build/
+*.apk
+*.aab
+*.so
 
 # Expo
 .expo/
@@ -37,3 +42,4 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+android/app/build/

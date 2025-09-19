@@ -16,14 +16,18 @@ export const AvatarPlaceholder: React.FC<AvatarPlaceholderProps> = ({
   textColor = "#fff",
   style,
 }) => {
+  // console.log("name avatar", name);
+
   // Extraer iniciales del nombre
   const getInitials = (name: string) => {
     return name
-      .split(" ")
-      .map((word) => word.charAt(0))
-      .join("")
-      .substring(0, 2)
-      .toUpperCase();
+      ? name
+          .split(" ")
+          .map((word) => word.charAt(0))
+          .join("")
+          .substring(0, 2)
+          .toUpperCase()
+      : "NA";
   };
 
   const avatarStyle = [
