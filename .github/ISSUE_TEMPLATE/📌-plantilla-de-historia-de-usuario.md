@@ -2,7 +2,7 @@
 name: "\U0001F4CC Plantilla de Historia de Usuario"
 about: 'Esta plantilla estandarizada permite documentar historias de usuario de manera
   clara, escalable y mantenible. '
-title: "[FEAT]"
+title: ''
 labels: important
 assignees: ''
 
