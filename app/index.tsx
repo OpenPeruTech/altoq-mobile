@@ -1,16 +1,14 @@
+import { CustomSplashScreen } from "@/components/CustomSplashScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Redirect } from "expo-router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 
 export default function Index() {
+  const [showCustomSplash, setShowCustomSplash] = useState(true);
   const [hasSeenOnboarding, setHasSeenOnboarding] = useState<boolean | null>(
     null
   );
-
-  useEffect(() => {
-    checkOnboarding();
-  }, []);
 
   const checkOnboarding = async () => {
     try {
@@ -22,6 +20,17 @@ export default function Index() {
     }
   };
 
+  const handleSplashFinish = () => {
+    setShowCustomSplash(false);
+    checkOnboarding();
+  };
+
+  // Mostrar splash personalizado primero
+  if (showCustomSplash) {
+    return <CustomSplashScreen onFinish={handleSplashFinish} />;
+  }
+
+  // Luego continuar con la lógica normal
   if (hasSeenOnboarding === null) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
