@@ -14,7 +14,6 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -22,6 +21,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function CandidatesScreen() {
   const [searchText, setSearchText] = useState("");
