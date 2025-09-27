@@ -138,7 +138,7 @@ export default function Onboarding() {
       flatListRef.current?.scrollToIndex({ index: page + 1 });
     } else {
       await AsyncStorage.setItem("hasSeenOnboarding", "true");
-      router.replace("/(tabs)/Home");
+      router.replace("/(tabs)/home");
     }
   };
 
@@ -225,7 +225,7 @@ export default function Onboarding() {
         className="absolute top-16 right-5 z-10"
         onPress={async () => {
           await AsyncStorage.setItem("hasSeenOnboarding", "true");
-          router.replace("/(tabs)/Home");
+          router.replace("/(tabs)/home");
         }}
       >
         <Text className="text-gray-500 text-base">Skip</Text>

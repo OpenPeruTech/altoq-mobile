@@ -2,7 +2,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { CandidatesList } from "./components/CandidatesList";
 import { MainCandidates } from "./components/MainCandidates";
 import { PartyRows } from "./components/PartyRows";
