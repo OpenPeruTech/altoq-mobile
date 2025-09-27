@@ -3,6 +3,7 @@ import { useFonts } from "expo-font";
 import { router, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import "react-native-gesture-handler";
 import "react-native-reanimated";
 import "../../global.css";
 SplashScreen.preventAutoHideAsync();
