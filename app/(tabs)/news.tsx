@@ -1,6 +1,7 @@
 // (pantalla adicional para el futuro)
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function NewsTabScreen() {
   return (
