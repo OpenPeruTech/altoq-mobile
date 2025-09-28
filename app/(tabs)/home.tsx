@@ -5,6 +5,7 @@ import { autoritiesData } from "@/mooks/autoritiesData";
 import { candidaties } from "@/mooks/candidaties";
 
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -23,6 +24,9 @@ export default function HomeScreen() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentCandidateIndex((prev) => (prev + 1) % candidaties.length);
+      // Remove onboarding flag immediately when component mounts
+      // Remove this line in production
+      AsyncStorage.removeItem("hasSeenOnboarding");
     }, 5000);
     return () => clearInterval(interval);
   }, []);
