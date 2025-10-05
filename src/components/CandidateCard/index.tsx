@@ -21,10 +21,12 @@ export const CandidateCard: React.FC<CandidateProps> = ({
   return (
     <View className="bg-white rounded-xl p-4 flex-row items-start shadow-md">
       {/* Left side */}
-      <View className="w-24 items-center">
+      <View className="w-30 items-center">
         <AvatarPlaceholder name={name} size={50} backgroundColor={color} />
 
-        <Text className="text-base font-bold text-gray-800 mt-2">{name}</Text>
+        <Text className="text-base font-bold text-gray-800 mt-2 text-center">
+          {name}
+        </Text>
         <Text className="text-sm text-gray-500 text-center mb-2">{party}</Text>
 
         <View className="flex-row items-center mt-1">
