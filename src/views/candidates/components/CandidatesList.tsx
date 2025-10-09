@@ -1,3 +1,4 @@
+
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
@@ -8,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+
 import { Candidate, getPartyColor } from "../data/parties";
 
 interface CandidatesListProps {
@@ -27,14 +29,9 @@ export const CandidatesList: React.FC<CandidatesListProps> = ({
 }) => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* Search Bar */}
+      {/* Barra de búsqueda */}
       <View style={styles.searchContainer}>
-        <Ionicons
-          name="search"
-          size={20}
-          color="#999"
-          style={styles.searchIcon}
-        />
+        <Ionicons name="search" size={20} color="#999" style={styles.searchIcon} />
         <TextInput
           style={styles.searchInput}
           placeholder="¿Estas buscando algún candidato?"
@@ -71,7 +68,13 @@ export const CandidatesList: React.FC<CandidatesListProps> = ({
                 color={getPartyColor(index)}
                 style={styles.candidateIcon}
               />
-              <Text style={styles.candidateListName}>{candidate.name}</Text>
+              <Text
+                style={styles.candidateListName}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {candidate.name}
+              </Text>
             </View>
             <Text style={styles.verMasText}>Ver Más</Text>
           </TouchableOpacity>
@@ -91,10 +94,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#fff",
-    marginHorizontal: 20,
-    marginTop: 20,
-    marginBottom: 10,
-    paddingHorizontal: 16,
+    marginHorizontal: 16,
+    marginTop: 16,
+    marginBottom: 8,
+    paddingHorizontal: 12,
     borderRadius: 25,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -103,27 +106,27 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   searchIcon: {
-    marginRight: 10,
+    marginRight: 8,
   },
   searchInput: {
     flex: 1,
-    paddingVertical: 12,
+    paddingVertical: 10,
     fontSize: 14,
     color: "#333",
   },
   filtersContainer: {
     flexDirection: "row",
-    paddingHorizontal: 20,
-    marginBottom: 10,
-    gap: 10,
+    paddingHorizontal: 16,
+    marginBottom: 8,
+    gap: 8,
   },
   filterButton: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 18,
     borderWidth: 1,
     borderColor: "#e0e0e0",
   },
@@ -133,40 +136,46 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   candidatesListContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   candidateListItem: {
     backgroundColor: "#fff",
     borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    marginBottom: 8,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 3,
+    elevation: 2,
   },
   candidateInfo: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     flex: 1,
   },
   candidateIcon: {
-    marginRight: 12,
+    marginRight: 8,
   },
   candidateListName: {
-    fontSize: 16,
+    fontSize: 15,
     color: "#333",
     fontWeight: "500",
+    textAlignVertical: "center",
+    flexShrink: 1,
   },
   verMasText: {
-    fontSize: 14,
+    fontSize: 13,
     color: "#666",
+    textAlignVertical: "center",
   },
   bottomSpacing: {
-    height: 100,
+    height: 60,
   },
 });
+
