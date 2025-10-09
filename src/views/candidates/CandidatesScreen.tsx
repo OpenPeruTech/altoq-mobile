@@ -27,6 +27,7 @@ import {
 export const CandidatesScreen: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   const [selectedParty, setSelectedParty] = useState<string | null>(null);
+  const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
 
   const handleSearch = (text: string) => {
     setSearchText(text);
@@ -42,14 +43,14 @@ export const CandidatesScreen: React.FC = () => {
   };
 
   const handleCandidatePress = (candidate: Candidate) => {
-    // Implementar navegación al detalle del candidato
-    console.log("Candidato seleccionado:", candidate);
+    console.log("Candidato seleccionado a:", candidate);
   };
 
   const handleMainCandidatePress = (candidate: MainCandidate) => {
     // Implementar navegación al detalle del candidato principal
     console.log("Candidato principal seleccionado:", candidate);
   };
+
 
   // Si hay un partido seleccionado, mostrar la vista de candidatos
   if (selectedParty) {
@@ -205,4 +206,6 @@ const styles = StyleSheet.create({
   bottomSpacing: {
     height: 100,
   },
+  
+
 });

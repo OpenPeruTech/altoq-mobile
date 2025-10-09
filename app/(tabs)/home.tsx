@@ -4,7 +4,6 @@ import { autoritiesData } from "@/mooks/autoritiesData";
 import { candidaties } from "@/mooks/candidaties";
 
 import { Ionicons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import {
   ScrollView,
@@ -28,6 +27,7 @@ export default function HomeScreen() {
   const months = Math.floor(daysLeft / 30);
   const days = daysLeft % 30;
   const hours = currentDate.getHours();
+
   const [currentCandidateIndex, setCurrentCandidateIndex] = useState(0);
   
   // Animación para el swipe
@@ -106,6 +106,7 @@ export default function HomeScreen() {
       <StatusBar barStyle="dark-content" backgroundColor="#ffffffff" />
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {/* Header */}
+
         <View className="px-5 pt-2">
           <View className="flex-row items-center">
             <AvatarPlaceholder
