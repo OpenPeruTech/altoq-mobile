@@ -55,13 +55,13 @@ export default function CandidatesScreen() {
     const partyCandidates = candidatesByParty[selectedParty] || [];
 
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
         {/* Header con botón de regreso */}
         <View style={styles.header}>
           <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
             <Ionicons name="arrow-back" size={24} color="#fff" />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Acción Popular</Text>
+          <Text style={styles.headerTitle}>{selectedParty}</Text>
           <View style={styles.placeholder} />
         </View>
 
@@ -78,7 +78,7 @@ export default function CandidatesScreen() {
 
   // Vista principal de partidos
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Lista De Candidatos</Text>
@@ -86,6 +86,7 @@ export default function CandidatesScreen() {
 
       <ScrollView
         style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         {/* Search Bar */}
@@ -151,12 +152,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8f9fa",
   },
   header: {
-    backgroundColor: "#e53e3e",
-    paddingVertical: 16,
-    paddingHorizontal: 20,
+   backgroundColor: "#f50a0aff",
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingVertical: 15,
+  paddingHorizontal: 20,
+  alignSelf: "center", // centra el rectángulo horizontalmente
+  width: "90%", // ocupa 90% del ancho
+  marginTop: 10,
+  borderRadius: 10, // hace que quede con bordes redondeados tipo píldora
   },
   headerTitle: {
     color: "#fff",
@@ -177,20 +182,25 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
+  scrollContent: {
+    alignItems: "center", // Centra horizontalmente buscador + partidos
+  },
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#fff",
-    marginHorizontal: 20,
     marginTop: 20,
     marginBottom: 10,
     paddingHorizontal: 16,
     borderRadius: 25,
-    shadowColor: "#000",
+    shadowColor: "#000000ff",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    width: "90%",          // Ocupa 90% del ancho
+    maxWidth: 400,         // Máximo ancho (opcional)
+    alignSelf: "center",   // Lo centra en el scroll
   },
   searchIcon: {
     marginRight: 10,
