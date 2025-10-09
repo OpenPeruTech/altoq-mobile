@@ -5,9 +5,15 @@ import { autoritiesData } from "@/mooks/autoritiesData";
 import { candidaties } from "@/mooks/candidaties";
 
 import { Ionicons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View, Image, StatusBar } from "react-native";
+import {
+  Image,
+  ScrollView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 const llamaImage = require("../../assets/images/llama.png");
 
@@ -20,6 +26,7 @@ export default function HomeScreen() {
   const months = Math.floor(daysLeft / 30);
   const days = daysLeft % 30;
   const hours = currentDate.getHours();
+
   const [currentCandidateIndex, setCurrentCandidateIndex] = useState(0);
 
   useEffect(() => {
@@ -34,6 +41,7 @@ export default function HomeScreen() {
       <StatusBar barStyle="dark-content" backgroundColor="#ff0000ff" />
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {/* Header */}
+
         <View className="px-5 pt-2">
           <View className="flex-row items-center">
             <AvatarPlaceholder
