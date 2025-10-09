@@ -2,8 +2,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as NavigationBar from "expo-navigation-bar";
 import { useRouter } from "expo-router";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-
 import {
   Dimensions,
   FlatList,
@@ -16,10 +14,14 @@ import {
   Text,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
+
+import { useAllThemeColors, useThemeColor } from "@/hooks/useThemeColor";
 
 const { width, height } = Dimensions.get("window");
-const ACCENT = "#E30613";
 
 type LineChunk = string | { hi: string };
 
@@ -58,6 +60,12 @@ export default function Onboarding() {
   const [index, setIndex] = useState(0);
   const insets = useSafeAreaInsets();
 
+  // Obtener colores del tema actual
+  const colors = useAllThemeColors();
+  const primaryColor = useThemeColor("primary");
+  const backgroundColor = useThemeColor("background");
+  const textColor = useThemeColor("text");
+
   const goHome = async () => {
     await AsyncStorage.setItem("hasSeenOnboarding", "true");
     router.replace("/(tabs)/home");
@@ -77,10 +85,10 @@ export default function Onboarding() {
 
     // Barra inferior Android
     if (Platform.OS === "android") {
-      NavigationBar.setBackgroundColorAsync("#fff");
+      NavigationBar.setBackgroundColorAsync(backgroundColor);
       NavigationBar.setButtonStyleAsync("dark");
     }
-  }, []);
+  }, [backgroundColor]);
 
   const PROGRESS_IMAGES = [
     require("../../assets/images/progress-1.png"),
@@ -97,15 +105,18 @@ export default function Onboarding() {
 
   return (
     <SafeAreaView
-      className="flex-1 bg-white"
+      className="flex-1"
+      style={{ backgroundColor }}
       edges={["top", "left", "right", "bottom"]}
     >
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <StatusBar barStyle="dark-content" backgroundColor={backgroundColor} />
 
       {/* Top bar */}
       <View className="h-11 items-end justify-center px-4">
         <Pressable onPress={goHome} hitSlop={8}>
-          <Text className="text-base font-medium text-gray-900">Skip</Text>
+          <Text className="text-base font-medium" style={{ color: textColor }}>
+            Skip
+          </Text>
         </Pressable>
       </View>
 
@@ -124,7 +135,7 @@ export default function Onboarding() {
           index: i,
         })}
         renderItem={({ item }) => (
-          <View style={{ width }} className="flex-1 bg-white">
+          <View style={{ width, backgroundColor }} className="flex-1">
             {/* Imagen centrada */}
             <View
               style={{ height: height * 0.5 }}
@@ -145,7 +156,8 @@ export default function Onboarding() {
               {item.lines.map((row: LineChunk[], idx: number) => (
                 <Text
                   key={idx}
-                  className="text-[28px] leading-[34px] font-extrabold text-[#0B0B0B] mb-1.5"
+                  className="text-[28px] leading-[34px] font-extrabold mb-1.5"
+                  style={{ color: textColor }}
                 >
                   {row.map((chunk: LineChunk, i: number) =>
                     typeof chunk === "string" ? (
@@ -153,7 +165,11 @@ export default function Onboarding() {
                     ) : (
                       <Text
                         key={i}
-                        className="bg-[#E30613] text-white px-2 py-0 rounded-md"
+                        className="px-2 py-0 rounded-md"
+                        style={{
+                          backgroundColor: primaryColor,
+                          color: colors.textOnPrimary,
+                        }}
                       >
                         {chunk.hi}
                       </Text>
@@ -177,9 +193,12 @@ export default function Onboarding() {
               key={i}
               className={
                 active
-                  ? "bg-[#E30613] w-7 h-2 rounded-full mr-2"
-                  : "bg-[#f8d9dd] w-2.5 h-2.5 rounded-full mr-2"
+                  ? "w-7 h-2 rounded-full mr-2"
+                  : "w-2.5 h-2.5 rounded-full mr-2"
               }
+              style={{
+                backgroundColor: active ? primaryColor : colors.accent,
+              }}
             />
           ))}
         </View>
@@ -187,11 +206,11 @@ export default function Onboarding() {
         <Pressable
           onPress={next}
           className="w-16 h-16 rounded-full border-2 items-center justify-center"
-          style={{ borderColor: ACCENT }}
+          style={{ borderColor: primaryColor }}
         >
           <View
             className="rounded-full items-center justify-center"
-            style={{ backgroundColor: ACCENT, width: 52, height: 52 }}
+            style={{ backgroundColor: primaryColor, width: 52, height: 52 }}
           >
             <Image source={PROGRESS_IMAGES[index]} resizeMode="contain" />
           </View>

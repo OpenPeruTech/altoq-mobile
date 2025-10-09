@@ -1,10 +1,6 @@
+import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Tabs } from "expo-router";
 import React from "react";
-import { Platform } from "react-native";
-
-import { HapticTab } from "@/components/HapticTab";
-import { IconSymbol } from "@/components/ui/IconSymbol";
-import TabBarBackground from "@/components/ui/TabBarBackground";
 
 export default function TabLayout() {
   return (
@@ -13,25 +9,19 @@ export default function TabLayout() {
         tabBarActiveTintColor: "#e53e3e",
         tabBarInactiveTintColor: "#999999",
         headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarShowLabel: false, // Oculta las etiquetas de texto
-        tabBarStyle: Platform.select({
-          ios: {
-            position: "absolute",
-          },
-          default: {
-            backgroundColor: "#ffffff",
-            borderTopWidth: 1,
-            borderTopColor: "#f0f0f0",
-            elevation: 10,
-            shadowOffset: { width: 0, height: -2 },
-            shadowOpacity: 0.1,
-            shadowRadius: 3,
-            paddingBottom: 5,
-            height: 60,
-          },
-        }),
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          marginHorizontal: 20,
+          position: "absolute",
+          bottom: 40,
+          left: 20,
+          backgroundColor:'transparent',
+          right: 20,
+          paddingTop: 10, 
+          height: 60,
+          elevation:0,
+          borderTopWidth: 0,
+        },
       }}
     >
       <Tabs.Screen
