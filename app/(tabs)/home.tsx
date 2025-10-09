@@ -19,6 +19,8 @@ export default function HomeScreen() {
   const months = Math.floor(daysLeft / 30);
   const days = daysLeft % 30;
   const hours = currentDate.getHours();
+
+
   const [currentCandidateIndex, setCurrentCandidateIndex] = useState(0);
 
   useEffect(() => {
@@ -35,6 +37,7 @@ export default function HomeScreen() {
     <SafeAreaView className="flex-1">
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {/* Header */}
+
         <View className="px-5 pt-2">
           <View className="flex-row items-center">
             <AvatarPlaceholder
@@ -94,9 +97,8 @@ export default function HomeScreen() {
             {autoritiesData.map((authority, index) => (
               <TouchableOpacity
                 key={index}
-                className={`bg-white rounded-lg p-3 flex-row items-center mb-3 shadow-sm ${
-                  index < 2 ? "w-[48%]" : "w-[30%]"
-                }`}
+                className={`bg-white rounded-lg p-3 flex-row items-center mb-3 shadow-sm ${index < 2 ? "w-[48%]" : "w-[30%]"
+                  }`}
               >
                 <Ionicons
                   name={authority.icon as any}
@@ -128,11 +130,10 @@ export default function HomeScreen() {
             {candidaties.map((_: any, idx: any) => (
               <View
                 key={idx}
-                className={`h-2 rounded-full mx-1 ${
-                  currentCandidateIndex === idx
+                className={`h-2 rounded-full mx-1 ${currentCandidateIndex === idx
                     ? "bg-red-600 w-5"
                     : "bg-red-200 w-2"
-                }`}
+                  }`}
               />
             ))}
           </View>
