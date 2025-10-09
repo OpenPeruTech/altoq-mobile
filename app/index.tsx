@@ -9,7 +9,6 @@ export default function Index() {
   const [hasSeenOnboarding, setHasSeenOnboarding] = useState<boolean | null>(
     null
   );
-
   const checkOnboarding = async () => {
     try {
       const value = await AsyncStorage.getItem("hasSeenOnboarding");

@@ -1,27 +1,23 @@
-export const candidaties: any = [
-  { title: "Presidente", icon: "person", count: 1, color: "#ff6b6b" },
+export const candidaties = [
   {
-    title: "Vicepresidentes",
-    icon: "people",
-    count: 2,
-    color: "#4ecdc4",
+    name: "Keiko Fujimori",
+    party: "Fuerza Popular",
+    percentage: 20,
+    details: "Líder de Fuerza Popular",
+    color: "#0033a0",
   },
   {
-    title: "Senadores",
-    icon: "people-circle",
-    count: 60,
-    color: "#45b7d1",
+    name: "Rafael López Aliaga",
+    party: "Renovación Popular",
+    percentage: 15,
+    details: "Alcalde de Lima",
+    color: "#ffcc00",
   },
   {
-    title: "Diputados",
-    icon: "people-outline",
-    count: 130,
-    color: "#f9ca24",
-  },
-  {
-    title: "Parlamentos Andinos",
-    icon: "library",
-    count: 5,
-    color: "#6c5ce7",
+    name: "Verónika Mendoza",
+    party: "Nuevo Perú",
+    percentage: 12,
+    details: "Ex candidata presidencial",
+    color: "#d32f2f",
   },
 ];
