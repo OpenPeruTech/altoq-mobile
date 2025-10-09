@@ -1,50 +1,55 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as NavigationBar from "expo-navigation-bar";
 import { useRouter } from "expo-router";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Dimensions,
   FlatList,
   Image,
   NativeScrollEvent,
   NativeSyntheticEvent,
+  Platform,
   Pressable,
   StatusBar,
   Text,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
+
+import { useAllThemeColors, useThemeColor } from "@/hooks/useThemeColor";
 
 const { width, height } = Dimensions.get("window");
-const ACCENT = "#E30613";
-const BLACK = "#0B0B0B";
 
 type LineChunk = string | { hi: string };
 
 const SLIDES: { id: string; image: any; lines: LineChunk[][] }[] = [
   {
     id: "1",
-    image: require("../../assets/images/splash-icon.png"),
+    image: require("../../assets/images/aviso01.png"),
     lines: [
-      ["¡Infórmate ", { hi: "al toke!" }],
+      ["¡Infórmate ", { hi: " al toke! " }],
       ["Conoce a todos los candidatos en un"],
       ["solo lugar"],
     ],
   },
   {
     id: "2",
-    image: require("../../assets/images/splash-icon.png"),
+    image: require("../../assets/images/aviso02.png"),
     lines: [
       ["Toda la info que necesitas saber en un"],
-      ["solo lugar, ", { hi: "clarito y sin floro" }],
+      ["solo lugar, ", { hi: " clarito y sin floro " }],
     ],
   },
   {
     id: "3",
-    image: require("../../assets/images/splash-icon.png"),
+    image: require("../../assets/images/aviso03.png"),
     lines: [
       ["Explora, compara y"],
       ["elige de manera sencilla"],
-      ["con ayuda de la ", { hi: "inteligencia artificial" }],
+      ["con ayuda de la ", { hi: " inteligencia artificial " }],
     ],
   },
 ];
@@ -53,6 +58,13 @@ export default function Onboarding() {
   const router = useRouter();
   const listRef = useRef<FlatList>(null);
   const [index, setIndex] = useState(0);
+  const insets = useSafeAreaInsets();
+
+  // Obtener colores del tema actual
+  const colors = useAllThemeColors();
+  const primaryColor = useThemeColor("primary");
+  const backgroundColor = useThemeColor("background");
+  const textColor = useThemeColor("text");
 
   const goHome = async () => {
     await AsyncStorage.setItem("hasSeenOnboarding", "true");
@@ -67,21 +79,44 @@ export default function Onboarding() {
     }
   };
 
+  useEffect(() => {
+    // StatusBar arriba
+    StatusBar.setBarStyle("dark-content", true);
+
+    // Barra inferior Android
+    if (Platform.OS === "android") {
+      NavigationBar.setBackgroundColorAsync(backgroundColor);
+      NavigationBar.setButtonStyleAsync("dark");
+    }
+  }, [backgroundColor]);
+
+  const PROGRESS_IMAGES = [
+    require("../../assets/images/progress-1.png"),
+    require("../../assets/images/progress-2.png"),
+    require("../../assets/images/progress-3.png"),
+  ];
+
   const onMomentumEnd = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const i = Math.round(e.nativeEvent.contentOffset.x / width);
     if (i !== index) setIndex(i);
   };
 
-  const segments = useMemo(() => SLIDES.map((_, i) => i <= index), [index]);
+  const segments = useMemo(() => SLIDES.map((_, i) => i === index), [index]);
 
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={["top", "left", "right"]}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+    <SafeAreaView
+      className="flex-1"
+      style={{ backgroundColor }}
+      edges={["top", "left", "right", "bottom"]}
+    >
+      <StatusBar barStyle="dark-content" backgroundColor={backgroundColor} />
 
       {/* Top bar */}
       <View className="h-11 items-end justify-center px-4">
         <Pressable onPress={goHome} hitSlop={8}>
-          <Text className="text-base font-medium text-gray-500">Skip</Text>
+          <Text className="text-base font-medium" style={{ color: textColor }}>
+            Skip
+          </Text>
         </Pressable>
       </View>
 
@@ -100,33 +135,41 @@ export default function Onboarding() {
           index: i,
         })}
         renderItem={({ item }) => (
-          <View style={{ width }} className="flex-1 bg-white">
+          <View style={{ width, backgroundColor }} className="flex-1">
             {/* Imagen centrada */}
             <View
-              style={{ height: height * 0.48 }}
+              style={{ height: height * 0.5 }}
               className="items-center justify-center"
             >
               <Image
                 source={item.image}
                 resizeMode="contain"
-                style={{ width: width * 0.72, height: "100%" as any }}
+                style={{ width: width, height: height * 0.5 }}
               />
             </View>
 
             {/* Texto inferior */}
-            <View style={{ paddingBottom: height * 0.12 }} className="px-6">
-              {item.lines.map((row, idx) => (
+            <View
+              style={{ paddingTop: 16, paddingBottom: height * 0.15 }}
+              className="px-10"
+            >
+              {item.lines.map((row: LineChunk[], idx: number) => (
                 <Text
                   key={idx}
-                  className="text-[28px] leading-[34px] font-extrabold text-[#0B0B0B] mb-1.5"
+                  className="text-[28px] leading-[34px] font-extrabold mb-1.5"
+                  style={{ color: textColor }}
                 >
-                  {row.map((chunk, i) =>
+                  {row.map((chunk: LineChunk, i: number) =>
                     typeof chunk === "string" ? (
                       <Text key={i}>{chunk}</Text>
                     ) : (
                       <Text
                         key={i}
-                        className="bg-[#E30613] text-white px-1.5 rounded-md"
+                        className="px-2 py-0 rounded-md"
+                        style={{
+                          backgroundColor: primaryColor,
+                          color: colors.textOnPrimary,
+                        }}
                       >
                         {chunk.hi}
                       </Text>
@@ -140,35 +183,36 @@ export default function Onboarding() {
       />
 
       {/* Bottom controls */}
-      <View className="absolute bottom-7 left-4 right-4 flex-row items-center justify-between">
-        {/* Barra progresiva 3 segmentos */}
+      <View
+        className="absolute left-8 right-8 flex-row items-center justify-between"
+        style={{ bottom: insets.bottom + 16 }}
+      >
         <View className="flex-row items-center">
           {segments.map((active, i) => (
             <View
               key={i}
               className={
                 active
-                  ? "bg-[#E30613] w-7 h-2 rounded-full mr-2"
-                  : "bg-[#f8d9dd] w-2.5 h-2.5 rounded-full mr-2"
+                  ? "w-7 h-2 rounded-full mr-2"
+                  : "w-2.5 h-2.5 rounded-full mr-2"
               }
+              style={{
+                backgroundColor: active ? primaryColor : colors.accent,
+              }}
             />
           ))}
         </View>
 
-        {/* Botón siguiente */}
         <Pressable
           onPress={next}
           className="w-16 h-16 rounded-full border-2 items-center justify-center"
-          style={{ borderColor: ACCENT }}
+          style={{ borderColor: primaryColor }}
         >
           <View
             className="rounded-full items-center justify-center"
-            style={{ backgroundColor: ACCENT, width: 52, height: 52 }}
+            style={{ backgroundColor: primaryColor, width: 52, height: 52 }}
           >
-            <Image
-              source={require("../../assets/images/progress.png")}
-              resizeMode="contain"
-            />
+            <Image source={PROGRESS_IMAGES[index]} resizeMode="contain" />
           </View>
         </Pressable>
       </View>
