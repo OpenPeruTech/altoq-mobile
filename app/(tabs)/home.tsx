@@ -1,13 +1,21 @@
 import { CandidateCard } from "@/components/CandidateCard";
 import { AvatarPlaceholder } from "@/components/ui/AvatarPlaceholder";
-import { Typography } from "@/components/ui/text";
 import { autoritiesData } from "@/mooks/autoritiesData";
 import { candidaties } from "@/mooks/candidaties";
 
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View, Image, StatusBar } from "react-native";
+import {
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  Image,
+  StatusBar,
+  PanResponder,
+  Animated,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 const llamaImage = require("../../assets/images/llama.png");
 
@@ -21,17 +29,81 @@ export default function HomeScreen() {
   const days = daysLeft % 30;
   const hours = currentDate.getHours();
   const [currentCandidateIndex, setCurrentCandidateIndex] = useState(0);
+  
+  // Animación para el swipe
+  const pan = useState(new Animated.ValueXY())[0];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
+  // Configurar el PanResponder para detectar gestos de swipe
+  const panResponder = useState(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderMove: Animated.event([
+        null,
+        { dx: pan.x }
+      ], { useNativeDriver: false }),
+      onPanResponderRelease: (_, gestureState) => {
+        // Umbral para considerar un swipe
+        const swipeThreshold = 50;
+        
+        if (gestureState.dx < -swipeThreshold) {
+          // Swipe izquierda - siguiente candidato
+          goToNextCandidate();
+        } else if (gestureState.dx > swipeThreshold) {
+          // Swipe derecha - candidato anterior
+          goToPreviousCandidate();
+        } else {
+          // Vuelve a la posición original si no se superó el umbral
+          Animated.spring(pan, {
+            toValue: { x: 0, y: 0 },
+            useNativeDriver: false
+          }).start();
+        }
+      }
+    })
+  )[0];
+
+  const goToNextCandidate = () => {
+    Animated.timing(pan, {
+      toValue: { x: -500, y: 0 },
+      duration: 50,
+      useNativeDriver: false
+    }).start(() => {
       setCurrentCandidateIndex((prev) => (prev + 1) % candidaties.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-  //console.log("Candidatos cargados:", candidaties);
+      pan.setValue({ x: 500, y: 0 });
+      Animated.timing(pan, {
+        toValue: { x: 0, y: 0 },
+        duration: 50,
+        useNativeDriver: false
+      }).start();
+    });
+  };
+
+  const goToPreviousCandidate = () => {
+    Animated.timing(pan, {
+      toValue: { x: 500, y: 0 },
+      duration: 50,
+      useNativeDriver: false
+    }).start(() => {
+      setCurrentCandidateIndex((prev) => 
+        prev === 0 ? candidaties.length - 1 : prev - 1
+      );
+      pan.setValue({ x: -500, y: 0 });
+      Animated.timing(pan, {
+        toValue: { x: 0, y: 0 },
+        duration: 50,
+        useNativeDriver: false
+      }).start();
+    });
+  };
+
+  // Estilo animado para la tarjeta
+  const animatedStyle = {
+    transform: pan.getTranslateTransform()
+  };
+
   return (
     <SafeAreaView className="flex-1">
-      <StatusBar barStyle="dark-content" backgroundColor="#ff0000ff" />
+      <StatusBar barStyle="dark-content" backgroundColor="#ffffffff" />
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View className="px-5 pt-2">
@@ -41,7 +113,9 @@ export default function HomeScreen() {
               size={40}
               backgroundColor="#ffa726"
             />
-            <Typography variant="titlelg"> Buenos!</Typography>
+            <Text className="text-black text-2xl font-bold ml-3">
+              Buenos días!
+            </Text>
           </View>
         </View>
 
@@ -61,7 +135,7 @@ export default function HomeScreen() {
           <View className="flex-row justify-center items-center mb-2">
             {/* Meses */}
             <View className="items-center mx-4">
-              <Text className="text-white text-6xl font-bold">
+              <Text className="text-white text-5xl font-bold">
                 {months.toString().padStart(2, "0")}
               </Text>
               <Text className="text-white text-xs opacity-90">Meses</Text>
@@ -69,7 +143,7 @@ export default function HomeScreen() {
 
             {/* Días */}
             <View className="items-center mx-4">
-              <Text className="text-white text-6xl font-bold">
+              <Text className="text-white text-5xl font-bold">
                 {days.toString().padStart(2, "0")}
               </Text>
               <Text className="text-white text-xs opacity-90">Días</Text>
@@ -77,7 +151,7 @@ export default function HomeScreen() {
 
             {/* Horas */}
             <View className="items-center mx-4">
-              <Text className="text-white text-6xl font-bold">
+              <Text className="text-white text-5xl font-bold">
                 {hours.toString().padStart(2, "0")}
               </Text>
               <Text className="text-white text-xs opacity-90">Horas</Text>
@@ -129,7 +203,7 @@ export default function HomeScreen() {
             {autoritiesData.slice(2).map((authority, index) => (
               <TouchableOpacity
                 key={index}
-                className="bg-white rounded-lg p-3 flex-row items-center mb-3 shadow-sm w-[30%]"
+                className="bg-white rounded-lg p-2 flex-row items-center mb-3 shadow-sm w-[30%]"
               >
                 <Ionicons
                   name={authority.icon as any}
@@ -149,16 +223,22 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* Candidates */}
+        {/* Candidates con Swipe (solo manual) */}
         <View className="px-5 mt-6">
           <Text className="text-lg font-bold text-gray-800 mb-4">
             Los más populares
           </Text>
 
-          <CandidateCard {...candidaties[currentCandidateIndex]} />
+          <Animated.View
+            {...panResponder.panHandlers}
+            style={animatedStyle}
+          >obs
+          
+            <CandidateCard {...candidaties[currentCandidateIndex]} />
+          </Animated.View>
 
           <View className="flex-row justify-center mt-3">
-            {candidaties.map((_: any, idx: any) => (
+            {candidaties.map((_, idx: number) => (
               <View
                 key={idx}
                 className={`h-2 rounded-full mx-1 ${
@@ -169,6 +249,11 @@ export default function HomeScreen() {
               />
             ))}
           </View>
+
+          {/* Instrucciones para el usuario */}
+          <Text className="text-center text-gray-500 mt-2 text-xs">
+            Desliza hacia los lados para cambiar de candidato
+          </Text>
         </View>
 
         <View className="h-24" />
