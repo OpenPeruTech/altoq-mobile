@@ -1,4 +1,3 @@
-
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
@@ -9,8 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
-import { Candidate, getPartyColor } from "../data/parties";
+import { Candidate, getPartyColor } from "../../data/parties";
 
 interface CandidatesListProps {
   candidates: Candidate[];
@@ -31,7 +29,12 @@ export const CandidatesList: React.FC<CandidatesListProps> = ({
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Barra de búsqueda */}
       <View style={styles.searchContainer}>
-        <Ionicons name="search" size={20} color="#999" style={styles.searchIcon} />
+        <Ionicons
+          name="search"
+          size={20}
+          color="#999"
+          style={styles.searchIcon}
+        />
         <TextInput
           style={styles.searchInput}
           placeholder="¿Estas buscando algún candidato?"
@@ -116,6 +119,8 @@ const styles = StyleSheet.create({
   },
   filtersContainer: {
     flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
     paddingHorizontal: 16,
     marginBottom: 8,
     gap: 8,
@@ -126,7 +131,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingHorizontal: 10,
     paddingVertical: 6,
-    borderRadius: 18,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: "#e0e0e0",
   },
@@ -156,7 +161,7 @@ const styles = StyleSheet.create({
   candidateInfo: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     flex: 1,
   },
   candidateIcon: {
@@ -173,9 +178,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: "#666",
     textAlignVertical: "center",
+    paddingRight: 20,
   },
   bottomSpacing: {
     height: 60,
   },
 });
-

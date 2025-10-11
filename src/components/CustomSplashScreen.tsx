@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import Animated, {
-    runOnJS,
-    useAnimatedStyle,
-    useSharedValue,
-    withSequence,
-    withTiming,
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withTiming,
 } from "react-native-reanimated";
 
 interface CustomSplashScreenProps {
