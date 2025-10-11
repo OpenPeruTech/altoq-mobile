@@ -1,7 +1,9 @@
 import { useFonts } from "expo-font";
+import * as NavigationBar from "expo-navigation-bar";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { Platform } from "react-native";
 import "react-native-gesture-handler";
 import "react-native-reanimated";
 import "../global.css";
@@ -22,6 +24,16 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
+  // Configurar barra de navegación en Android
+  useEffect(() => {
+    if (Platform.OS === "android") {
+      // Barra de navegación transparente
+      NavigationBar.setBackgroundColorAsync("#ffffff01"); // Casi transparente
+      NavigationBar.setButtonStyleAsync("dark"); // Botones oscuros
+      NavigationBar.setBehaviorAsync("overlay-swipe"); // Los botones aparecen al deslizar
+    }
+  }, []);
+
   if (!loaded) {
     return null;
   }
@@ -32,7 +44,6 @@ export default function RootLayout() {
         headerShown: false,
       }}
     >
-      
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="onboarding/index" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

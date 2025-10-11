@@ -1,26 +1,41 @@
 import { IconSymbol } from "@/components/ui/IconSymbol";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import { Tabs } from "expo-router";
 import React from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function TabLayout() {
+  const insets = useSafeAreaInsets();
+  const tabIconSelected = useThemeColor("tabIconSelected");
+  const tabIconDefault = useThemeColor("tabIconDefault");
+  const tabBarBackground = useThemeColor("tabBarBackground");
+  const tabBarBorder = useThemeColor("tabBarBorder");
+
+  // Altura del TabBar que incluye el espacio del sistema
+  const tabBarHeight = 60 + insets.bottom;
+
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "#e53e3e",
-        tabBarInactiveTintColor: "#999999",
+        tabBarActiveTintColor: tabIconSelected,
+        tabBarInactiveTintColor: tabIconDefault,
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          marginHorizontal: 20,
           position: "absolute",
-          bottom: 40,
-          left: 20,
-          backgroundColor:'transparent',
-          right: 20,
-          paddingTop: 10, 
-          height: 60,
-          elevation:0,
-          borderTopWidth: 0,
+          bottom: 0, // Pegado al borde inferior
+          left: 0,
+          right: 0,
+          backgroundColor: tabBarBackground,
+          height: tabBarHeight,
+          paddingBottom: insets.bottom > 0 ? insets.bottom : 10, // Respeta el espacio del sistema
+          paddingTop: 8,
+          paddingHorizontal: 20,
+          borderTopWidth: 1,
+          borderTopColor: tabBarBorder,
+          // Sin sombra
+          shadowOpacity: 0,
+          elevation: 0,
         },
       }}
     >

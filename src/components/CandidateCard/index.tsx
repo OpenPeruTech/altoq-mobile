@@ -1,4 +1,5 @@
 import { AvatarPlaceholder } from "@/components/ui/AvatarPlaceholder";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Text, View } from "react-native";
@@ -18,8 +19,17 @@ export const CandidateCard: React.FC<CandidateProps> = ({
   details,
   color,
 }) => {
+  const cardBackground = useThemeColor("surface");
+  const borderColor = useThemeColor("border");
   return (
-    <View className="bg-white rounded-xl p-4 flex-row items-start shadow-md">
+    <View
+      className="bg-white rounded-xl p-4 flex-row items-start shadow-md"
+      style={{
+        backgroundColor: cardBackground,
+        borderWidth: 1,
+        borderColor: borderColor,
+      }}
+    >
       {/* Left side */}
       <View className="w-30 items-center">
         <AvatarPlaceholder name={name} size={50} backgroundColor={color} />

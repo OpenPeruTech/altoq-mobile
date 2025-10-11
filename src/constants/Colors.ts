@@ -30,8 +30,10 @@ export const Colors = {
     // Colores de interfaz
     tint: primaryBrand,
     icon: "#687076",
-    tabIconDefault: "#687076",
+    tabIconDefault: "#9CA3AF",
     tabIconSelected: primaryBrand,
+    tabBarBackground: "#FFFFFF",
+    tabBarBorder: "#E5E7EB",
 
     // Colores de estado
     success: "#22C55E",
@@ -64,8 +66,10 @@ export const Colors = {
     // Colores de interfaz
     tint: primaryBrand,
     icon: "#9BA1A6",
-    tabIconDefault: "#9BA1A6",
+    tabIconDefault: "#6B7280",
     tabIconSelected: primaryBrand,
+    tabBarBackground: "#1F2937",
+    tabBarBorder: "#374151",
 
     // Colores de estado
     success: "#22C55E",
@@ -87,6 +91,52 @@ export const BrandColors = {
   accent: accentBrand,
 } as const;
 
+// Colores para las autoridades políticas
+export const AuthorityColors = {
+  president: "#ff6b6b", // Rojo suave para Presidente
+  vicePresident: "#4ecdc4", // Turquesa para Vicepresidentes
+  senator: "#45b7d1", // Azul claro para Senadores
+  deputy: "#f9ca24", // Amarillo para Diputados
+  andeanParliament: "#6c5ce7", // Morado para Parlamentos Andinos
+} as const;
+
+// Colores para la UI de candidatos
+export const CandidatesUIColors = {
+  // Headers y navegación
+  headerBackground: "#f50a0aff",
+  headerText: "#FFFFFF",
+
+  // Cards y superficies
+  cardBackground: "#FFFFFF",
+  cardBorder: "#00000025",
+  cardShadow: "#000",
+
+  // Textos
+  textPrimary: "#333",
+  textSecondary: "#666",
+  textTertiary: "#999",
+
+  // Fondos
+  screenBackground: "#f8f9fa",
+
+  // Estados y detalles
+  activeTab: "#E30613", // Rojo principal
+  inactiveTab: "#666",
+  tabBorder: "#eee",
+  badgeBackground: "#F8D9DD", // Rosa claro para badges
+
+  // Avatares y fotos
+  avatarOverlay: "rgba(0,0,0,0.4)",
+  coverBackground: "#1e293b",
+  profileBorder: "#fff",
+
+  // Timeline y detalles
+  timelineDot: "#E30613",
+  timelineText: "#333",
+} as const;
+
 // Exportar tipos para TypeScript
 export type ColorScheme = keyof typeof Colors;
 export type ColorName = keyof typeof Colors.light;
+export type AuthorityColorType = keyof typeof AuthorityColors;
+export type CandidatesUIColorType = keyof typeof CandidatesUIColors;

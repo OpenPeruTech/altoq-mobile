@@ -3,7 +3,7 @@ import { AvatarPlaceholder } from "@/components/ui/AvatarPlaceholder";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Party, getPartyColor } from "../data/parties";
+import { Party, getPartyColor } from "../../data/parties";
 
 interface PartyRowsProps {
   parties: Party[];
