@@ -4,7 +4,7 @@
     "slug": "YoElijo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/icon-YoElijo.png",
     "scheme": "yoelijo",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
