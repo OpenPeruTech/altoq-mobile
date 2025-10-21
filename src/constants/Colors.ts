@@ -5,7 +5,7 @@
  */
 
 // Colores principales de la marca YoElijo
-const primaryBrand = "#E30613"; // Rojo principal
+const primaryBrand = "#5FD0CF"; // Rojo principal
 const secondaryBrand = "#141CFF"; // Azul secundario
 const accentBrand = "#F8D9DD"; // Rosa claro para highlights
 
@@ -21,6 +21,8 @@ export const Colors = {
     textSecondary: "#687076",
     textTertiary: "#A3A3A3",
     textOnPrimary: "#FFFFFF",
+    textOnboarding: "#5FD0CF",
+    backgroundOnboardingOne: "#20244B",
 
     // Colores de fondo
     background: "#FFFFFF",
@@ -56,7 +58,9 @@ export const Colors = {
     text: "#FFFFFF",
     textSecondary: "#9BA1A6",
     textTertiary: "#6B7280",
-    textOnPrimary: "#FFFFFF",
+    textOnPrimary: "#5FD0CF",
+    textOnboarding: "#5FD0CF",
+    backgroundOnboardingOne: "#20244B",
 
     // Colores de fondo
     background: "#1F2937", // Más claro que el negro actual

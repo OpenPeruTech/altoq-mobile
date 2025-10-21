@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "YoElijo",
-    "slug": "YoElijo",
+    "name": "Altoque",
+    "slug": "Altoque",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon-YoElijo.png",
-    "scheme": "yoelijo",
+    "icon": "./assets/images/icon-Altoque.png",
+    "scheme": "altoque",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {

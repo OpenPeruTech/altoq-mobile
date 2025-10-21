@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as NavigationBar from "expo-navigation-bar";
 import { useRouter } from "expo-router";
@@ -5,7 +6,6 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Dimensions,
   FlatList,
-  Image,
   NativeScrollEvent,
   NativeSyntheticEvent,
   Platform,
@@ -19,6 +19,7 @@ import {
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 
+import { ProgressButton } from "@/components/ui";
 import { useAllThemeColors, useThemeColor } from "@/hooks/useThemeColor";
 
 const { width, height } = Dimensions.get("window");
@@ -30,7 +31,7 @@ const SLIDES: { id: string; image: any; lines: LineChunk[][] }[] = [
     id: "1",
     image: require("../../../assets/images/aviso01.png"),
     lines: [
-      ["¡Infórmate ", { hi: " al toke! " }],
+      [{ hi: "¡Infórmate al toke! " }],
       ["Conoce a todos los candidatos en un"],
       ["solo lugar"],
     ],
@@ -79,22 +80,27 @@ export default function OnboardingView() {
     }
   };
 
+  const previous = () => {
+    if (index > 0) {
+      listRef.current?.scrollToIndex({ index: index - 1, animated: true });
+    } else {
+      goHome();
+    }
+  };
+
   useEffect(() => {
-    // StatusBar arriba
-    StatusBar.setBarStyle("dark-content", true);
+    // StatusBar arriba - cambia según el slide
+    const barStyle = index === 0 ? "light-content" : "light-content";
+    StatusBar.setBarStyle(barStyle, true);
 
     // Barra inferior Android
     if (Platform.OS === "android") {
-      NavigationBar.setBackgroundColorAsync(backgroundColor);
-      NavigationBar.setButtonStyleAsync("dark");
+      const navBarColor =
+        index === 0 ? colors.backgroundOnboardingOne : backgroundColor;
+      NavigationBar.setBackgroundColorAsync(navBarColor);
+      NavigationBar.setButtonStyleAsync(index === 0 ? "light" : "dark");
     }
-  }, [backgroundColor]);
-
-  const PROGRESS_IMAGES = [
-    require("../../../assets/images/progress-1.png"),
-    require("../../../assets/images/progress-2.png"),
-    require("../../../assets/images/progress-3.png"),
-  ];
+  }, [backgroundColor, index, colors.backgroundOnboardingOne]);
 
   const onMomentumEnd = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const i = Math.round(e.nativeEvent.contentOffset.x / width);
@@ -103,20 +109,32 @@ export default function OnboardingView() {
 
   const segments = useMemo(() => SLIDES.map((_, i) => i === index), [index]);
 
-  return (
-    <SafeAreaView
-      className="flex-1"
-      style={{ backgroundColor }}
-      edges={["top", "left", "right", "bottom"]}
-    >
-      <StatusBar barStyle="dark-content" backgroundColor={backgroundColor} />
+  // Colores dinámicos según el slide actual
+  const currentBackgroundColor = colors.backgroundOnboardingOne;
+  // index === 0 ? colors.backgroundOnboardingOne : backgroundColor;
+  const currentTextColor = index === 0 ? "#FFFFFF" : textColor;
 
-      {/* Top bar */}
-      <View className="h-11 items-end justify-center px-4">
-        <Pressable onPress={goHome} hitSlop={8}>
-          <Text className="text-base font-medium" style={{ color: textColor }}>
-            Skip
-          </Text>
+  return (
+    <View className="flex-1" style={{ backgroundColor }}>
+      <StatusBar
+        barStyle={"light-content"}
+        backgroundColor={currentBackgroundColor}
+      />
+
+      {/* Barra superior del sistema con color específico */}
+      <SafeAreaView
+        edges={["top"]}
+        style={{ backgroundColor: currentBackgroundColor }}
+      />
+      <View style={{ backgroundColor: currentBackgroundColor, height: 20 }} />
+
+      {/* Top bar - Back button */}
+      <View
+        className="absolute z-10 px-6 py-4"
+        style={{ top: insets.top + 30, left: 0 }}
+      >
+        <Pressable onPress={previous} hitSlop={8}>
+          <Ionicons name="chevron-back" size={32} color={currentTextColor} />
         </Pressable>
       </View>
 
@@ -134,65 +152,59 @@ export default function OnboardingView() {
           offset: width * i,
           index: i,
         })}
-        renderItem={({ item }) => (
-          <View style={{ width, backgroundColor }} className="flex-1">
-            {/* Imagen centrada */}
-            <View
-              style={{ height: height * 0.5 }}
-              className="items-center justify-center"
-            >
-              <Image
-                source={item.image}
-                resizeMode="contain"
-                style={{ width: width, height: height * 0.5 }}
-              />
-            </View>
+        renderItem={({ item }) => {
+          const slideBackground =
+            item.id === "1" ? colors.backgroundOnboardingOne : backgroundColor;
+          const slideTextColor = item.id === "1" ? "#FFFFFF" : textColor;
 
-            {/* Texto inferior */}
+          return (
             <View
-              style={{ paddingTop: 16, paddingBottom: height * 0.15 }}
-              className="px-10"
+              style={{ width, backgroundColor: slideBackground }}
+              className="flex-1"
             >
-              {item.lines.map((row: LineChunk[], idx: number) => (
-                <View
-                  key={idx}
-                  className="flex-row flex-wrap mb-1.5"
-                  style={{ alignItems: "center" }}
-                >
-                  {row.map((chunk: LineChunk, i: number) =>
-                    typeof chunk === "string" ? (
-                      <Text
-                        key={i}
-                        className="text-[28px] leading-[34px] font-extrabold"
-                        style={{ color: textColor }}
-                      >
-                        {chunk}
-                      </Text>
-                    ) : (
-                      <View
-                        key={i}
-                        className="px-2 rounded-md"
-                        style={{
-                          backgroundColor: primaryColor,
-                          paddingVertical: 2,
-                        }}
-                      >
+              {/* Imagen centrada */}
+              <View
+                style={{ height: height * 0.5 }}
+                className="items-center justify-center"
+              >
+                {/* <Image
+                  source={item.image}
+                  resizeMode="contain"
+                  style={{ width: width, height: height * 0.5 }}
+                /> */}
+              </View>
+
+              {/* Texto inferior */}
+              <View
+                style={{ paddingTop: 16, paddingBottom: height * 0.15 }}
+                className="px-10"
+              >
+                {item.lines.map((row: LineChunk[], idx: number) => (
+                  <Text
+                    key={idx}
+                    className="text-[28px] leading-[34px] font-extrabold"
+                    style={{ color: slideTextColor }}
+                  >
+                    {row.map((chunk: LineChunk, i: number) =>
+                      typeof chunk === "string" ? (
+                        chunk
+                      ) : (
                         <Text
-                          className="text-[28px] leading-[34px] font-extrabold"
+                          key={i}
                           style={{
-                            color: colors.textOnPrimary,
+                            color: colors.textOnboarding,
                           }}
                         >
                           {chunk.hi}
                         </Text>
-                      </View>
-                    )
-                  )}
-                </View>
-              ))}
+                      )
+                    )}
+                  </Text>
+                ))}
+              </View>
             </View>
-          </View>
-        )}
+          );
+        }}
       />
 
       {/* Bottom controls */}
@@ -216,19 +228,16 @@ export default function OnboardingView() {
           ))}
         </View>
 
-        <Pressable
+        <ProgressButton
           onPress={next}
-          className="w-16 h-16 rounded-full border-2 items-center justify-center"
-          style={{ borderColor: primaryColor }}
-        >
-          <View
-            className="rounded-full items-center justify-center"
-            style={{ backgroundColor: primaryColor, width: 52, height: 52 }}
-          >
-            <Image source={PROGRESS_IMAGES[index]} resizeMode="contain" />
-          </View>
-        </Pressable>
+          progress={(index + 1) / SLIDES.length}
+          iconName="chevron-forward"
+          iconColor={colors.textOnPrimary}
+          backgroundColor={primaryColor}
+          progressColor={primaryColor}
+          size={64}
+        />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
