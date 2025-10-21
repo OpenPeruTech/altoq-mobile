@@ -1,7 +1,6 @@
 import { AuthorityCard } from "@/components/AuthorityCard";
 import { CandidateCard } from "@/components/CandidateCard";
 import { SeederButton } from "@/components/DevTools/SeederButton";
-import { AvatarPlaceholder } from "@/components/ui/AvatarPlaceholder";
 import { Loading } from "@/components/ui/Loading";
 import { useAuthorities, usePopularCandidates } from "@/hooks";
 import { useThemeColor } from "@/hooks/useThemeColor";
@@ -18,7 +17,8 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-const llamaImage = require("../../../assets/images/llama.png");
+import { LinearGradient } from "expo-linear-gradient";
+const logo_altoq = require("../../../assets/images/altoq-logo.png");
 
 export default function HomeView() {
   // Obtener colores del tema
@@ -29,13 +29,17 @@ export default function HomeView() {
   const accentColor = useThemeColor("accent");
   const warningColor = useThemeColor("warning");
   const currentDate = new Date();
-  const electionDate = new Date("2026-04-05");
 
-  const timeDiff = electionDate.getTime() - currentDate.getTime();
-  const daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
-  const months = Math.floor(daysLeft / 30);
-  const days = daysLeft % 30;
-  const hours = currentDate.getHours();
+  // Fechas para las vueltas electorales
+  const primeraVueltaDate = new Date("2026-04-05");
+  const segundaVueltaDate = new Date("2026-05-24");
+
+  // Cálculo de días para cada vuelta
+  const timeDiffPrimera = primeraVueltaDate.getTime() - currentDate.getTime();
+  const daysLeftPrimera = Math.ceil(timeDiffPrimera / (1000 * 3600 * 24));
+
+  const timeDiffSegunda = segundaVueltaDate.getTime() - currentDate.getTime();
+  const daysLeftSegunda = Math.ceil(timeDiffSegunda / (1000 * 3600 * 24));
 
   // Datos de Firebase
   const { authorities, loading: authoritiesLoading } = useAuthorities();
@@ -185,187 +189,234 @@ export default function HomeView() {
         message="Cargando datos..."
       />
       <SafeAreaView className="flex-1" style={{ backgroundColor }}>
-        <StatusBar barStyle="dark-content" backgroundColor={backgroundColor} />
+        <StatusBar barStyle="light-content" backgroundColor={primaryColor} />
         <SeederButton />
         <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-          {/* Header */}
-          <View className="px-5 pt-2">
-            <View className="flex-row items-center">
-              <AvatarPlaceholder
-                name="Kelvin Guerra"
-                size={40}
-                backgroundColor={warningColor}
-              />
-              <Text
-                className="text-2xl font-bold ml-3"
-                style={{ color: textColor }}
-              >
-                Buenos días!
-              </Text>
-            </View>
-          </View>
-
-          {/* Countdown Card */}
-          <View
-            className="mx-5 p-5 relative overflow-hidden mt-4"
-            style={{ borderRadius: 20, backgroundColor: primaryColor }}
+          {/* Card Principal con Linear Gradient */}
+          <LinearGradient
+            colors={["#306A69", "#5FD0CF"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            className="pb-5"
+            style={{
+              borderBottomLeftRadius: 15,
+              borderBottomRightRadius: 15,
+            }}
           >
-            <View className="flex-row items-center mb-5">
-              <Ionicons name="calendar" size={20} color="#FFFFFF" />
-              <Text
-                className="text-base font-semibold ml-2"
-                style={{ color: "#FFFFFF" }}
-              >
-                Elecciones Generales 2026
-              </Text>
-            </View>
-
-            {/* CONTENEDOR PRINCIPAL CENTRADO */}
-            <View className="flex-row justify-center items-center mb-2">
-              {/* Meses */}
-              <View className="items-center mx-3">
+            {/* Header dentro del card */}
+            <View className="pt-2 px-5">
+              <View className="flex-row items-center">
                 <Text
-                  className="text-5xl font-bold"
+                  className="text-2xl font-bold ml-3"
                   style={{ color: "#FFFFFF" }}
                 >
-                  {months.toString().padStart(2, "0")}
+                  Informate
                 </Text>
-                <Text
-                  className="text-xs opacity-90"
-                  style={{ color: "#FFFFFF" }}
-                >
-                  Meses
-                </Text>
-              </View>
-
-              {/* Días */}
-              <View className="items-center mx-3">
-                <Text
-                  className="text-5xl font-bold"
-                  style={{ color: "#FFFFFF" }}
-                >
-                  {days.toString().padStart(2, "0")}
-                </Text>
-                <Text
-                  className="text-xs opacity-90"
-                  style={{ color: "#FFFFFF" }}
-                >
-                  Días
-                </Text>
-              </View>
-
-              {/* Horas */}
-              <View className="items-center mx-3">
-                <Text
-                  className="text-5xl font-bold"
-                  style={{ color: "#FFFFFF" }}
-                >
-                  {hours.toString().padStart(2, "0")}
-                </Text>
-                <Text
-                  className="text-xs opacity-90"
-                  style={{ color: "#FFFFFF" }}
-                >
-                  Horas
-                </Text>
-              </View>
-            </View>
-
-            {/* Mascot */}
-            <View className="absolute" style={{ right: -60, top: 3 }}>
-              <Image
-                source={llamaImage}
-                style={{ width: 132, height: 132, opacity: 0.9 }}
-                resizeMode="contain"
-              />
-            </View>
-          </View>
-
-          {/* Authorities */}
-          <View className="px-5 mt-6">
-            <Text
-              className="text-lg font-bold mb-4"
-              style={{ color: textColor }}
-            >
-              ¿Qué autoridades elegiremos?
-            </Text>
-
-            {/* Fila superior - Presidente y Vicepresidente centrados */}
-            <View className="flex-row justify-center mb-4">
-              {authorities.slice(0, 2).map((authority, index) => (
-                <AuthorityCard
-                  key={authority.id || index}
-                  {...authority}
-                  width="w-[120px]"
+                <Image
+                  source={logo_altoq}
+                  style={{ width: 50, height: 50, opacity: 0.9 }}
+                  resizeMode="contain"
                 />
-              ))}
+              </View>
             </View>
 
-            {/* Fila inferior - Las otras 3 autoridades en horizontal */}
-            <View className="flex-row justify-between">
-              {authorities.slice(2).map((authority, index) => (
-                <AuthorityCard
-                  key={authority.id || index}
-                  {...authority}
-                  width="w-[30%]"
-                />
-              ))}
-            </View>
-          </View>
-
-          {/* Candidates con Swipe (solo manual) */}
-          <View className="px-5 mt-6">
-            <Text
-              className="text-lg font-bold mb-4"
-              style={{ color: textColor }}
-            >
-              Los más populares
-            </Text>
-
-            {candidates.length > 0 && candidates[currentCandidateIndex] ? (
-              <>
-                <Animated.View
-                  {...panResponder.panHandlers}
-                  style={animatedStyle}
+            {/* Contenido del Countdown */}
+            <View className="px-5 mt-4">
+              {/* CONTENEDOR DE VUELTAS - Ahora con dos cards separados */}
+              <View className="flex-row justify-between items-center">
+                {/* Card Primera Vuelta */}
+                <View
+                  className="flex-1 mr-2 p-4 rounded-xl"
+                  style={{ backgroundColor: "rgba(255, 255, 255, 1)" }}
                 >
-                  <CandidateCard {...candidates[currentCandidateIndex]} />
-                </Animated.View>
-
-                <View className="flex-row justify-center mt-3">
-                  {candidates.map((_, idx: number) => (
-                    <View
-                      key={idx}
-                      className={`h-2 rounded-full mx-1 ${
-                        currentCandidateIndex === idx ? "w-5" : "w-2"
-                      }`}
-                      style={{
-                        backgroundColor:
-                          currentCandidateIndex === idx
-                            ? primaryColor
-                            : accentColor,
-                      }}
-                    />
-                  ))}
+                  <View className="flex-row items-center justify-between">
+                    <View className="flex-1">
+                      <Text
+                        className="text-1xl font-bold"
+                        style={{ color: "#000000" }}
+                      >
+                        1ra{"\n"}
+                        <Text style={{ color: "#5FD0CF" }}>vuelta</Text>
+                      </Text>
+                    </View>
+                    <View className="items-center flex-1">
+                      <Text
+                        className="text-5xl font-bold"
+                        style={{ color: "#5FD0CF" }}
+                      >
+                        {daysLeftPrimera}
+                      </Text>
+                      <Text
+                        className="text-xs mt-1"
+                        style={{ color: "#5FD0CF" }}
+                      >
+                        Días
+                      </Text>
+                    </View>
+                  </View>
                 </View>
 
-                {/* Instrucciones para el usuario */}
-                <Text
-                  className="text-center mt-2 text-xs"
-                  style={{ color: textSecondaryColor }}
+                {/* Card Segunda Vuelta */}
+                <View
+                  className="flex-1 ml-2 p-4 rounded-xl"
+                  style={{ backgroundColor: "rgba(255, 255, 255, 1)" }}
                 >
-                  Desliza hacia los lados para cambiar de candidato
+                  <View className="flex-row items-center justify-between">
+                    <View className="flex-1">
+                      <Text
+                        className=" text-1xl font-bold"
+                        style={{ color: "#000000" }}
+                      >
+                        2da{"\n"}
+                        <Text style={{ color: "#5FD0CF" }}>vuelta</Text>
+                      </Text>
+                    </View>
+                    <View className="items-center flex-1">
+                      <Text
+                        className="text-5xl font-bold"
+                        style={{ color: "#5FD0CF" }}
+                      >
+                        {daysLeftSegunda}
+                      </Text>
+                      <Text
+                        className="text-xs mt-1"
+                        style={{ color: "#5FD0CF" }}
+                      >
+                        Días
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+
+              {/* Información adicional */}
+              <View className="flex-row items-center mt-5">
+                <Ionicons name="calendar" size={18} color="#FFFFFF" />
+                <Text
+                  className="text-md ml-2 text-center"
+                  style={{ color: "#FFFFFF" }}
+                >
+                  Elecciones generales 2026
                 </Text>
-              </>
-            ) : (
-              <Text className="text-gray-500 text-sm">
-                {candidates.length === 0
-                  ? "Cargando candidatos..."
-                  : "Error al cargar candidato"}
-              </Text>
-            )}
+              </View>
+            </View>
+          </LinearGradient>
+
+          {/* Componente Proceso Electoral */}
+          <View className="mx-5 mt-6 p-5 rounded-2xl bg-white">
+            <Text
+              className="text-lg font-bold mb-4"
+              style={{ color: textColor }}
+            >
+              Proceso electoral
+            </Text>
+
+            <View className="space-y-1">
+              {/* Inscripción De Candidatos En Curso - PRIMERO MARCADO */}
+              <View className="flex-row items-center">
+                <Ionicons
+                  name="checkmark-circle"
+                  size={20}
+                  color={primaryColor}
+                  style={{ marginRight: 12 }}
+                />
+                <Text className="text-sm flex-1" style={{ color: textColor }}>
+                  Inscripción De Candidatos En Curso
+                </Text>
+              </View>
+
+              {/* Línea divisoria */}
+              <View className="h-4 w-px bg-gray-300 ml-2" />
+
+              {/* Publicación Del Padrón Electoral - SEGUNDO NO MARCADO */}
+              <View className="flex-row items-center">
+                <View className="w-5 h-5 rounded-full border-2 border-gray-400 mr-3 ml-0.5" />
+                <Text className="text-sm flex-1" style={{ color: textColor }}>
+                  Publicación Del Padrón Electoral
+                </Text>
+              </View>
+
+              {/* Línea divisoria */}
+              <View className="h-4 w-px bg-gray-300 ml-2" />
+
+              {/* Día De Votación - TERCERO NO MARCADO */}
+              <View className="flex-row items-center">
+                <View className="w-5 h-5 rounded-full border-2 border-gray-400 mr-3 ml-0.5" />
+                <Text className="text-sm flex-1" style={{ color: textColor }}>
+                  Día De Votación: 12 De Abril De 2026
+                </Text>
+              </View>
+
+              {/* Línea divisoria */}
+              <View className="h-4 w-px bg-gray-300 ml-2" />
+
+              {/* Segunda Vuelta - CUARTO NO MARCADO */}
+              <View className="flex-row items-center">
+                <View className="w-5 h-5 rounded-full border-2 border-gray-400 mr-3 ml-0.5" />
+                <Text className="text-sm flex-1" style={{ color: textColor }}>
+                  Segunda Vuelta (Si Aplica): Junio 2026
+                </Text>
+              </View>
+            </View>
           </View>
 
-          <View className="h-24" />
+          {/* Resto del contenido */}
+          <View className="flex-1" style={{ backgroundColor }}>
+  
+            {/* Candidates con Swipe (solo manual) */}
+            <View className="px-5 mt-6">
+              <Text
+                className="text-lg font-bold mb-4"
+                style={{ color: textColor }}
+              >
+                Los más populares
+              </Text>
+
+              {candidates.length > 0 && candidates[currentCandidateIndex] ? (
+                <>
+                  <Animated.View
+                    {...panResponder.panHandlers}
+                    style={animatedStyle}
+                  >
+                    <CandidateCard {...candidates[currentCandidateIndex]} />
+                  </Animated.View>
+
+                  <View className="flex-row justify-center mt-3">
+                    {candidates.map((_, idx: number) => (
+                      <View
+                        key={idx}
+                        className={`h-2 rounded-full mx-1 ${
+                          currentCandidateIndex === idx ? "w-5" : "w-2"
+                        }`}
+                        style={{
+                          backgroundColor:
+                            currentCandidateIndex === idx
+                              ? primaryColor
+                              : accentColor,
+                        }}
+                      />
+                    ))}
+                  </View>
+
+                  {/* Instrucciones para el usuario */}
+                  <Text
+                    className="text-center mt-2 text-xs"
+                    style={{ color: textSecondaryColor }}
+                  >
+                    Desliza hacia los lados para cambiar de candidato
+                  </Text>
+                </>
+              ) : (
+                <Text className="text-gray-500 text-sm">
+                  {candidates.length === 0
+                    ? "Cargando candidatos..."
+                    : "Error al cargar candidato"}
+                </Text>
+              )}
+            </View>
+
+            <View className="h-24" />
+          </View>
         </ScrollView>
       </SafeAreaView>
     </>
