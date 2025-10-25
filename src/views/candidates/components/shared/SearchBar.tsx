@@ -1,7 +1,7 @@
 import { CandidatesUIColors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { TextInput, View } from "react-native";
 
 interface SearchBarProps {
   value: string;
@@ -15,49 +15,26 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = "¿Estas buscando algún candidato?",
 }) => {
   return (
-    <View style={styles.searchContainer}>
-      <Ionicons
-        name="search"
-        size={20}
-        color="#999"
-        style={styles.searchIcon}
-      />
-      <TextInput
-        style={styles.searchInput}
-        placeholder={placeholder}
-        placeholderTextColor="#999"
-        value={value}
-        onChangeText={onChangeText}
-      />
+    <View style={{ backgroundColor: CandidatesUIColors.cardBackground }} className="w-full flex items-center mt-6 mb-4">
+
+      <View className="flex-row items-center bg-white px-4 py-2
+       rounded-3xl shadow-sm  w-3/4"
+       style={{ borderColor: "#e0e0e0" , borderWidth: 1 }}
+       >
+        <Ionicons
+          name="search"
+          size={20}
+          color="#000"
+        />
+        <TextInput
+          className="flex-1 ml-10 py-2 text-sm text-gray-800 "
+          placeholder={placeholder}
+          placeholderTextColor="#999"
+          value={value}
+          onChangeText={onChangeText}
+        />
+      </View>
     </View>
+
   );
 };
-
-const styles = StyleSheet.create({
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: CandidatesUIColors.cardBackground,
-    marginTop: 20,
-    marginBottom: 10,
-    paddingHorizontal: 16,
-    borderRadius: 25,
-    shadowColor: CandidatesUIColors.cardShadow,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-    width: "90%",
-    maxWidth: 400,
-    alignSelf: "center",
-  },
-  searchIcon: {
-    marginRight: 10,
-  },
-  searchInput: {
-    flex: 1,
-    paddingVertical: 12,
-    fontSize: 14,
-    color: CandidatesUIColors.textPrimary,
-  },
-});

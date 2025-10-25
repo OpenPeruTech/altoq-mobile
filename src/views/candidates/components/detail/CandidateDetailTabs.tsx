@@ -34,7 +34,7 @@ export const CandidateDetailTabs: React.FC<CandidateDetailTabsProps> = ({
             style={[
               styles.tab,
               index === 1 ? styles.tabCenter : styles.tabSide,
-              activeTab === tab.key && styles.activeTabBorder,
+             ,
             ]}
           >
             <Text
@@ -74,18 +74,16 @@ const styles = StyleSheet.create({
   tabSide: {
     marginHorizontal: 4,
   },
-  activeTabBorder: {
-    borderBottomWidth: 2,
-    borderBottomColor: CandidatesUIColors.activeTab,
-  },
+
   tabText: {
     fontWeight: "600",
     fontSize: 14,
     color: CandidatesUIColors.inactiveTab,
   },
   activeTabText: {
-    color: CandidatesUIColors.activeTab,
+    color: "#5FD0CF",
   },
 });
 
 export type { TabType };
+

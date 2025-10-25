@@ -10,7 +10,9 @@ interface TabContentProps {
 
 export const TabContent: React.FC<TabContentProps> = ({ activeTab }) => {
   if (activeTab === "trayectoria") {
-    return <TimelineView />;
+    return (
+      <TimelineView />
+    );
   }
 
   if (activeTab === "plan") {

@@ -34,6 +34,7 @@ export const Colors = {
     tabIconSelected: primaryBrand,
     tabBarBackground: "#FFFFFF",
     tabBarBorder: "#E5E7EB",
+    gradient: ["#5FD0CF", "#306A69"] as const,
 
     // Colores de estado
     success: "#22C55E",

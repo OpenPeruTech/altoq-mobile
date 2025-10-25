@@ -61,20 +61,20 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 12,
     left: 12,
-    backgroundColor: CandidatesUIColors.avatarOverlay,
     padding: 8,
     borderRadius: 20,
     zIndex: 10,
   },
   coverImage: {
-    height: 240,
+    height: 150,
     backgroundColor: CandidatesUIColors.coverBackground,
     justifyContent: "flex-end",
     alignItems: "center",
   },
   avatarWrapper: {
     position: "absolute",
-    bottom: -40,
+    bottom: -80,
+    left: 10,
   },
   avatarCircle: {
     width: 160,
@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
     borderColor: CandidatesUIColors.profileBorder,
   },
   infoContainer: {
-    alignItems: "center",
-    marginTop: 56,
+    marginTop: 80,
+    alignItems: "flex-start",
     paddingHorizontal: 20,
   },
   candidateName: {

@@ -1,14 +1,15 @@
+import { CandidatesUIColors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { Candidate, getPartyColor } from "../../data/parties";
+import { SearchBar } from "../shared";
 
 interface CandidatesListProps {
   candidates: Candidate[];
@@ -27,32 +28,14 @@ export const CandidatesList: React.FC<CandidatesListProps> = ({
 }) => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* Barra de búsqueda */}
-      <View style={styles.searchContainer}>
-        <Ionicons
-          name="search"
-          size={20}
-          color="#999"
-          style={styles.searchIcon}
-        />
-        <TextInput
-          style={styles.searchInput}
-          placeholder="¿Estas buscando algún candidato?"
-          placeholderTextColor="#999"
-          value={searchText}
-          onChangeText={onSearchChange}
-        />
-      </View>
 
+      <SearchBar onChangeText={onSearchChange} value={searchText} placeholder="¿Estas buscando algun candidato?" />
       {/* Filtros */}
       <View style={styles.filtersContainer}>
-        <TouchableOpacity style={styles.filterButton}>
-          <Text style={styles.filterText}>Presidente</Text>
-          <Ionicons name="chevron-down" size={16} color="#666" />
-        </TouchableOpacity>
+   
         <TouchableOpacity style={styles.filterButton}>
           <Text style={styles.filterText}>Lima</Text>
-          <Ionicons name="chevron-down" size={16} color="#666" />
+          <Ionicons name="chevron-down" size={16} color={CandidatesUIColors.textTertiary} />
         </TouchableOpacity>
       </View>
 
@@ -137,26 +120,24 @@ const styles = StyleSheet.create({
   },
   filterText: {
     fontSize: 14,
-    color: "#666",
+    color: CandidatesUIColors.textTertiary,
     marginRight: 4,
   },
   candidatesListContainer: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 30,
+    marginTop: 8,
   },
   candidateListItem: {
     backgroundColor: "#fff",
-    borderRadius: 12,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
+    borderRadius: 10,
+    padding:14,
+    borderWidth: 1,
+    borderColor: "#e0e0e0",
     marginBottom: 8,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.08,
-    shadowRadius: 3,
-    elevation: 2,
+    marginVertical: 4,
   },
   candidateInfo: {
     flexDirection: "row",
@@ -173,6 +154,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     textAlignVertical: "center",
     flexShrink: 1,
+    marginLeft: 12,
   },
   verMasText: {
     fontSize: 13,

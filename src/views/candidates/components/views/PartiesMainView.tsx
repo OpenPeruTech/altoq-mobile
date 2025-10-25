@@ -1,15 +1,14 @@
-import { CandidatesUIColors } from "@/constants/Colors";
+import { CandidatesUIColors, Colors } from "@/constants/Colors";
 import { useMainCandidates, useParties } from "@/hooks";
 import { MainCandidate } from "@/views/candidates/data/parties";
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Loading } from "@/components";
-import { MainCandidates } from "../list";
-import { FivePartyRow, ThreePartyRow } from "../party";
+import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 import { SearchBar } from "../shared";
-
 interface PartiesMainViewProps {
   searchText: string;
   onSearchChange: (text: string) => void;
@@ -42,62 +41,91 @@ export const PartiesMainView: React.FC<PartiesMainViewProps> = ({
         visible={partiesLoading || candidatesLoading}
         message="Cargando datos..."
       />
+      <StatusBar barStyle={"light-content"} backgroundColor={"#5FD0CF"} translucent={false} />
+
+
+
+
       <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
         {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Lista De Candidatos</Text>
-        </View>
-
+        <LinearGradient
+          colors={Colors.light.gradient}
+          start={{ x: 1, y: -1 }}
+          end={{ x: 0, y: 1 }}
+          style={{
+            paddingTop: 32,
+            paddingBottom: 24,
+            borderBottomLeftRadius: 15,
+            borderBottomRightRadius: 15
+          }}
+        >
+          <Text className="text-white text-2xl font-bold text-center">
+            Lista De Partidos
+          </Text>
+        </LinearGradient>
+        {/* Search Bar */}
+        <SearchBar value={searchText} onChangeText={onSearchChange} />
         <ScrollView
-          style={styles.scrollView}
+          className="flex-1 px-4 s"
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          {/* Search Bar */}
-          <SearchBar value={searchText} onChangeText={onSearchChange} />
 
-          {/* Primera fila - 5 partidos con fotos */}
-          {firstRowParties.length > 0 && (
-            <FivePartyRow
-              parties={firstRowParties}
-              onPartyPress={onPartyPress}
-            />
-          )}
+          <View className="flex-row flex-wrap justify-between p-4">
+            {firstRowParties.map((item) => (
+              <TouchableOpacity
+                key={item.id}
+                onPress={() => onPartyPress(item.name)}
+                className="w-[48%] bg-white  p-4 mb-4 shadow-sm border-[0.5px] "
+                style={{ overflow: 'hidden', borderColor:"#e0e0e0", borderRadius: 16 }}
+              >
+                <View className="items-center justify-center flex-row gap-2">
+                  {/* Avatar del partido */}
+                  <View className="w-8 h-8 rounded-sm bg-red-200 items-center justify-center mb-3" />
 
-          {/* Segunda fila - 3 partidos estilo home */}
-          {secondRowParties.length > 0 && (
-            <ThreePartyRow
-              parties={secondRowParties}
-              onPartyPress={onPartyPress}
-            />
-          )}
+                  {/* Contenedor del nombre */}
+                  <View style={{ minHeight: 20, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text
+                      className="text-gray-800 font-semibold text-center text-sm"
+                      numberOfLines={1}
+                      style={{ color: CandidatesUIColors.textSecondary }}
+                      ellipsizeMode="tail"
+                    >
+                      {item.name}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
 
-          {/* Tercera fila - 5 partidos con fotos */}
-          {thirdRowParties.length > 0 && (
-            <FivePartyRow
-              parties={thirdRowParties}
-              onPartyPress={onPartyPress}
-            />
-          )}
+            ))}
+          </View>
 
-          {/* Cuarta fila - 3 partidos estilo home */}
-          {fourthRowParties.length > 0 && (
-            <ThreePartyRow
-              parties={fourthRowParties}
-              onPartyPress={onPartyPress}
-            />
-          )}
-
-          {/* Main Candidates */}
-          {mainCandidates.length > 0 && (
-            <MainCandidates
-              candidates={mainCandidates}
-              onCandidatePress={onMainCandidatePress}
-            />
-          )}
-
-          <View style={styles.bottomSpacing} />
         </ScrollView>
+        <View className="bg-gray-50 px-5 py-4 pb-60  ">
+          <Text className="text-gray-900 font-bold mb-4 p-4" style={{ fontSize: 16 }} >
+            Partidos Populares
+          </Text>
+
+          <View className="flex-row justify-around mt-2">
+            {[1, 2, 3].map((item, index) => (
+              <View key={item} className="items-center border-[0.5px] border-[#0000001A] p-4 mb-4 rounded-lg">
+                <View
+                  className="w-16 h-16 rounded-full items-center justify-center mb-2"
+                  style={{
+                    backgroundColor: index === 0 ? '#F59E0B' : index === 1 ? '#FB923C' : '#FB7185'
+                  }}
+                >
+                  <Ionicons name="people" size={28} color="#fff" />
+                </View>
+                <Text className="text-gray-600 text-xs text-center"
+                  style={{ color: CandidatesUIColors.textTertiary }}
+                >
+                  Partido Político {item}
+                </Text>
+              </View>
+            ))}
+          </View>
+        </View>
       </SafeAreaView>
     </>
   );
@@ -122,14 +150,12 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: CandidatesUIColors.headerText,
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
     flex: 1,
   },
-  scrollView: {
-    flex: 1,
-  },
+
   scrollContent: {
     alignItems: "center",
   },
