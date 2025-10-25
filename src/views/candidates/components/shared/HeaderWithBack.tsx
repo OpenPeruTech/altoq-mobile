@@ -1,7 +1,8 @@
-import { CandidatesUIColors } from "@/constants/Colors";
+import { Colors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StatusBar, Text, TouchableOpacity, View } from "react-native";
 
 interface HeaderWithBackProps {
   title: string;
@@ -13,43 +14,25 @@ export const HeaderWithBack: React.FC<HeaderWithBackProps> = ({
   onBackPress,
 }) => {
   return (
-    <View style={styles.header}>
-      <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="#fff" />
-      </TouchableOpacity>
-      <Text style={styles.headerTitle}>{title}</Text>
-      <View style={styles.placeholder} />
-    </View>
+    <LinearGradient colors={Colors.light.gradient}
+      start={{ x: 1, y: -1 }}
+      end={{ x: 0, y: 1 }}
+      style={{
+        paddingTop: 32,
+        paddingBottom: 24,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15
+      }}>
+      <StatusBar barStyle={"light-content"} backgroundColor={"#5FD0CF"} translucent={false} />
+      <View style={{display: 'flex', flexDirection: 'row',
+         alignItems: 'center', alignSelf: 'center'}}>
+        <TouchableOpacity onPress={onBackPress} >
+          <Ionicons name="arrow-back" size={24} color="#fff" />
+        </TouchableOpacity>
+        <Text className="text-white text-2xl font-bold text-center">{title}</Text>
+      </View>
+
+    </LinearGradient>
   );
 };
 
-const styles = StyleSheet.create({
-  header: {
-    backgroundColor: CandidatesUIColors.headerBackground,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    alignSelf: "center",
-    width: "90%",
-    marginTop: 10,
-    borderRadius: 10,
-  },
-  headerTitle: {
-    color: CandidatesUIColors.headerText,
-    fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center",
-    flex: 1,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  placeholder: {
-    width: 40,
-  },
-});

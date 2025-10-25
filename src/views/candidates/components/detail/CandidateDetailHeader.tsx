@@ -41,13 +41,11 @@ export const CandidateDetailHeader: React.FC<CandidateDetailHeaderProps> = ({
       {/* Información del candidato */}
       <View style={styles.infoContainer}>
         <Text style={styles.candidateName}>{candidateName}</Text>
-        <Text style={styles.username}>
-          @{candidateName.toLowerCase().replace(/\s+/g, "")}
+        <Text style={{lineHeight:20}}>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora esse consectetur animi eos sint doloribus numquam id, suscipit rem pariatur reiciendis expedita, atque harum debitis temporibus nihil eius, quas non?
         </Text>
 
-        <View style={styles.badge}>
-          <Text style={styles.badgeText}>Presidente</Text>
-        </View>
+
       </View>
     </>
   );
@@ -61,39 +59,40 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 12,
     left: 12,
-    backgroundColor: CandidatesUIColors.avatarOverlay,
     padding: 8,
     borderRadius: 20,
     zIndex: 10,
   },
   coverImage: {
-    height: 240,
+    height: 150,
     backgroundColor: CandidatesUIColors.coverBackground,
     justifyContent: "flex-end",
     alignItems: "center",
   },
   avatarWrapper: {
     position: "absolute",
-    bottom: -40,
+    bottom: -80,
+    left: 10,
   },
   avatarCircle: {
     width: 160,
     height: 160,
     borderRadius: 80,
-    backgroundColor: CandidatesUIColors.activeTab,
+    backgroundColor: "#5FD0CF",
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 4,
     borderColor: CandidatesUIColors.profileBorder,
   },
   infoContainer: {
-    alignItems: "center",
-    marginTop: 56,
+    marginTop: 90,
+    alignItems: "flex-start",
     paddingHorizontal: 20,
   },
   candidateName: {
     fontSize: 18,
     fontWeight: "bold",
+    marginVertical: 4,
     color: CandidatesUIColors.textPrimary,
   },
   username: {

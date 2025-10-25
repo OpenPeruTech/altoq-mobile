@@ -36,6 +36,7 @@ export const Colors = {
     tabIconSelected: primaryBrand,
     tabBarBackground: "#FFFFFF",
     tabBarBorder: "#E5E7EB",
+    gradient: ["#5FD0CF", "#306A69"] as const,
 
     // Colores de estado
     success: "#22C55E",
@@ -125,7 +126,7 @@ export const CandidatesUIColors = {
 
   // Estados y detalles
   activeTab: "#E30613", // Rojo principal
-  inactiveTab: "#666",
+  inactiveTab: "#A7A9A8",
   tabBorder: "#eee",
   badgeBackground: "#F8D9DD", // Rosa claro para badges
 
