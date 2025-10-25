@@ -122,7 +122,7 @@ export const CandidatesUIColors = {
 
   // Estados y detalles
   activeTab: "#E30613", // Rojo principal
-  inactiveTab: "#666",
+  inactiveTab: "#A7A9A8",
   tabBorder: "#eee",
   badgeBackground: "#F8D9DD", // Rosa claro para badges
 

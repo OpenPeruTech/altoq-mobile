@@ -2,7 +2,7 @@ import { CandidatesUIColors } from "@/constants/Colors";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-type TabType = "trayectoria" | "plan" | "propuestas";
+type TabType = "trayectoria" | "positivoNegativo" | "propuestas";
 
 interface Tab {
   key: TabType;
@@ -16,8 +16,9 @@ interface CandidateDetailTabsProps {
 
 const tabs: Tab[] = [
   { key: "trayectoria", label: "Trayectoria Política" },
-  { key: "plan", label: "Plan de Gobierno" },
   { key: "propuestas", label: "Propuestas" },
+  { key: "positivoNegativo", label: "Positivo y Negativo" },
+
 ];
 
 export const CandidateDetailTabs: React.FC<CandidateDetailTabsProps> = ({
@@ -34,7 +35,7 @@ export const CandidateDetailTabs: React.FC<CandidateDetailTabsProps> = ({
             style={[
               styles.tab,
               index === 1 ? styles.tabCenter : styles.tabSide,
-             ,
+              ,
             ]}
           >
             <Text
@@ -54,13 +55,14 @@ export const CandidateDetailTabs: React.FC<CandidateDetailTabsProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomWidth: 2,
-    borderBottomColor: CandidatesUIColors.tabBorder,
+
     marginTop: 24,
     marginBottom: 16,
     paddingHorizontal: 16,
   },
   tabsRow: {
+    borderBottomWidth: 2,
+    borderBottomColor: CandidatesUIColors.tabBorder,
     flexDirection: "row",
     justifyContent: "center",
   },

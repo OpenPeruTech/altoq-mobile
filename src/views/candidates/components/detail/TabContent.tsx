@@ -15,7 +15,7 @@ export const TabContent: React.FC<TabContentProps> = ({ activeTab }) => {
     );
   }
 
-  if (activeTab === "plan") {
+  if (activeTab === "propuestas") {
     return (
       <Text className="p-5 text-gray-700">
         Aquí va el contenido del Plan de Gobierno.
@@ -23,7 +23,7 @@ export const TabContent: React.FC<TabContentProps> = ({ activeTab }) => {
     );
   }
 
-  if (activeTab === "propuestas") {
+  if (activeTab === "positivoNegativo") {
     return (
       <Text className="p-5 text-gray-700">
         Aquí van las Propuestas del candidato.
