@@ -30,6 +30,7 @@ export default function CandidatesView() {
   };
 
   const handlePartyPress = (partyName: string) => {
+    console.log("CandidatesView - handlePartyPress called with:", partyName);
     setSelectedParty(partyName);
   };
 
@@ -53,6 +54,10 @@ export default function CandidatesView() {
 
   // Vista de detalle del candidato
   if (selectedCandidate) {
+    console.log(
+      "CandidatesView - Rendering CandidateDetailView with:",
+      selectedCandidate.name
+    );
     return (
       <CandidateDetailView
         candidate={selectedCandidate}

@@ -1,12 +1,13 @@
-import { CandidatesUIColors } from "@/constants/Colors";
+import { FilterOption, useStaticData } from "@/hooks/useStaticData";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
+import React, { useState } from "react";
 import {
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { Candidate, getPartyColor } from "../../data/parties";
 import { SearchBar } from "../shared";
@@ -26,143 +27,265 @@ export const CandidatesList: React.FC<CandidatesListProps> = ({
   onSearchChange,
   onCandidatePress,
 }) => {
-  return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+  const { data } = useStaticData();
+  const [selectedFilter, setSelectedFilter] = useState("Lima");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const textColor = useThemeColor("text");
+  const textSecondaryColor = useThemeColor("textSecondary");
+  const counterBackgroundColor = useThemeColor("counterBackground");
+  const borderColor = useThemeColor("border");
+  const primaryColor = useThemeColor("primary");
 
-      <SearchBar onChangeText={onSearchChange} value={searchText} placeholder="¿Estas buscando algun candidato?" />
+  const filterOptions: FilterOption[] = data?.filterOptions || [];
+
+  const handleFilterSelect = (filterName: string) => {
+    setSelectedFilter(filterName);
+    setIsDropdownOpen(false);
+  };
+
+  // Estilos estáticos
+  const staticStyles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    searchContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginHorizontal: 16,
+      marginTop: 16,
+      marginBottom: 8,
+      paddingHorizontal: 12,
+      borderRadius: 25,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 3,
+    },
+    searchIcon: {
+      marginRight: 8,
+    },
+    searchInput: {
+      flex: 1,
+      paddingVertical: 10,
+      fontSize: 14,
+    },
+    filtersContainer: {
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      alignItems: "center",
+      paddingHorizontal: 30,
+      marginBottom: 8,
+    },
+    filterSelect: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      borderRadius: 10,
+      borderWidth: 1,
+      minWidth: 120,
+    },
+    filterText: {
+      fontSize: 14,
+      marginRight: 8,
+      flex: 1,
+    },
+    dropdownContainer: {
+      position: "relative",
+      zIndex: 1000,
+    },
+    dropdown: {
+      position: "absolute",
+      top: "100%",
+      right: 0,
+      borderRadius: 10,
+      borderWidth: 1,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 5,
+      minWidth: 150,
+      marginTop: 4,
+    },
+    dropdownItem: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      borderBottomWidth: 1,
+    },
+    dropdownText: {
+      fontSize: 14,
+      flex: 1,
+    },
+    selectedDropdownText: {
+      fontWeight: "600",
+    },
+    candidatesListContainer: {
+      paddingHorizontal: 30,
+      marginTop: 8,
+    },
+    candidateListItem: {
+      borderRadius: 10,
+      padding: 14,
+      borderWidth: 1,
+      marginBottom: 8,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginVertical: 4,
+    },
+    candidateInfo: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "flex-start",
+      flex: 1,
+    },
+    candidateIcon: {
+      marginRight: 8,
+    },
+    candidateListName: {
+      fontSize: 15,
+      fontWeight: "500",
+      textAlignVertical: "center",
+      flexShrink: 1,
+      marginLeft: 12,
+    },
+    verMasText: {
+      fontSize: 13,
+      textAlignVertical: "center",
+      paddingRight: 20,
+    },
+    bottomSpacing: {
+      height: 60,
+    },
+  });
+
+  // Estilos dinámicos
+  const dynamicStyles = {
+    searchContainer: [
+      staticStyles.searchContainer,
+      { backgroundColor: counterBackgroundColor },
+    ],
+    searchInput: [staticStyles.searchInput, { color: textColor }],
+    filterSelect: [
+      staticStyles.filterSelect,
+      { backgroundColor: counterBackgroundColor, borderColor: borderColor },
+    ],
+    filterText: [staticStyles.filterText, { color: textColor }],
+    dropdown: [
+      staticStyles.dropdown,
+      { backgroundColor: counterBackgroundColor, borderColor: borderColor },
+    ],
+    dropdownItem: [
+      staticStyles.dropdownItem,
+      { borderBottomColor: borderColor },
+    ],
+    selectedDropdownItem: [
+      staticStyles.dropdownItem,
+      { backgroundColor: borderColor },
+    ],
+    dropdownText: [staticStyles.dropdownText, { color: textColor }],
+    selectedDropdownText: [
+      staticStyles.selectedDropdownText,
+      { color: primaryColor },
+    ],
+    candidateListItem: [
+      staticStyles.candidateListItem,
+      { backgroundColor: counterBackgroundColor, borderColor: borderColor },
+    ],
+    candidateListName: [staticStyles.candidateListName, { color: textColor }],
+    verMasText: [staticStyles.verMasText, { color: primaryColor }],
+  };
+
+  return (
+    <ScrollView
+      style={staticStyles.container}
+      showsVerticalScrollIndicator={false}
+    >
+      <SearchBar
+        onChangeText={onSearchChange}
+        value={searchText}
+        placeholder="¿Estas buscando algun candidato?"
+      />
       {/* Filtros */}
-      <View style={styles.filtersContainer}>
-   
-        <TouchableOpacity style={styles.filterButton}>
-          <Text style={styles.filterText}>Lima</Text>
-          <Ionicons name="chevron-down" size={16} color={CandidatesUIColors.textTertiary} />
-        </TouchableOpacity>
+      <View style={staticStyles.filtersContainer}>
+        <View style={staticStyles.dropdownContainer}>
+          <TouchableOpacity
+            style={dynamicStyles.filterSelect}
+            onPress={() => setIsDropdownOpen(!isDropdownOpen)}
+          >
+            <Text style={dynamicStyles.filterText}>{selectedFilter}</Text>
+            <Ionicons
+              name={isDropdownOpen ? "chevron-up" : "chevron-down"}
+              size={16}
+              color={textSecondaryColor}
+            />
+          </TouchableOpacity>
+
+          {isDropdownOpen && (
+            <View style={dynamicStyles.dropdown}>
+              {filterOptions.map((filter) => (
+                <TouchableOpacity
+                  key={filter.id}
+                  style={
+                    selectedFilter === filter.name
+                      ? dynamicStyles.selectedDropdownItem
+                      : dynamicStyles.dropdownItem
+                  }
+                  onPress={() => handleFilterSelect(filter.name)}
+                >
+                  <Text
+                    style={
+                      selectedFilter === filter.name
+                        ? dynamicStyles.selectedDropdownText
+                        : dynamicStyles.dropdownText
+                    }
+                  >
+                    {filter.name}
+                  </Text>
+                  {selectedFilter === filter.name && (
+                    <Ionicons name="checkmark" size={16} color="#5FD0CF" />
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
+          )}
+        </View>
       </View>
 
       {/* Lista de candidatos */}
-      <View style={styles.candidatesListContainer}>
+      <View style={staticStyles.candidatesListContainer}>
         {candidates.map((candidate, index) => (
           <TouchableOpacity
             key={candidate.id}
-            style={styles.candidateListItem}
+            style={dynamicStyles.candidateListItem}
             onPress={() => onCandidatePress?.(candidate)}
           >
-            <View style={styles.candidateInfo}>
+            <View style={staticStyles.candidateInfo}>
               <Ionicons
                 name="people"
                 size={24}
                 color={getPartyColor(index)}
-                style={styles.candidateIcon}
+                style={staticStyles.candidateIcon}
               />
               <Text
-                style={styles.candidateListName}
+                style={dynamicStyles.candidateListName}
                 numberOfLines={1}
                 ellipsizeMode="tail"
               >
                 {candidate.name}
               </Text>
             </View>
-            <Text style={styles.verMasText}>Ver Más</Text>
+            <Text style={dynamicStyles.verMasText}>Ver Más</Text>
           </TouchableOpacity>
         ))}
       </View>
 
-      <View style={styles.bottomSpacing} />
+      <View style={staticStyles.bottomSpacing} />
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    marginHorizontal: 16,
-    marginTop: 16,
-    marginBottom: 8,
-    paddingHorizontal: 12,
-    borderRadius: 25,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  searchIcon: {
-    marginRight: 8,
-  },
-  searchInput: {
-    flex: 1,
-    paddingVertical: 10,
-    fontSize: 14,
-    color: "#333",
-  },
-  filtersContainer: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    marginBottom: 8,
-    gap: 8,
-  },
-  filterButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#e0e0e0",
-  },
-  filterText: {
-    fontSize: 14,
-    color: CandidatesUIColors.textTertiary,
-    marginRight: 4,
-  },
-  candidatesListContainer: {
-    paddingHorizontal: 30,
-    marginTop: 8,
-  },
-  candidateListItem: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    padding:14,
-    borderWidth: 1,
-    borderColor: "#e0e0e0",
-    marginBottom: 8,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginVertical: 4,
-  },
-  candidateInfo: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    flex: 1,
-  },
-  candidateIcon: {
-    marginRight: 8,
-  },
-  candidateListName: {
-    fontSize: 15,
-    color: "#333",
-    fontWeight: "500",
-    textAlignVertical: "center",
-    flexShrink: 1,
-    marginLeft: 12,
-  },
-  verMasText: {
-    fontSize: 13,
-    color: "#666",
-    textAlignVertical: "center",
-    paddingRight: 20,
-  },
-  bottomSpacing: {
-    height: 60,
-  },
-});

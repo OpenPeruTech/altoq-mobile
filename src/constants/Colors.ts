@@ -37,6 +37,7 @@ export const Colors = {
     tabBarBackground: "#FFFFFF",
     tabBarBorder: "#E5E7EB",
     gradient: ["#5FD0CF", "#306A69"] as const,
+    counterBackground: "#FFFFFF",
 
     // Colores de estado
     success: "#22C55E",
@@ -64,7 +65,7 @@ export const Colors = {
     backgroundOnboardingOne: "#20244B",
 
     // Colores de fondo
-    background: "#1F2937", // Más claro que el negro actual
+    background: "#20244B", // Fondo principal en modo oscuro
     backgroundSecondary: "#374151",
     surface: "#4B5563",
 
@@ -75,6 +76,8 @@ export const Colors = {
     tabIconSelected: primaryBrand,
     tabBarBackground: "#1F2937",
     tabBarBorder: "#374151",
+    gradient: ["#292E65", "#292E65"] as const,
+    counterBackground: "#30377C",
 
     // Colores de estado
     success: "#22C55E",
@@ -121,8 +124,8 @@ export const CandidatesUIColors = {
   textSecondary: "#666",
   textTertiary: "#999",
 
-  // Fondos
-  screenBackground: "#f8f9fa",
+  // Fondos (se reemplaza por Colors.light/dark.background)
+  screenBackground: "#f8f9fa", // Deprecated: usar Colors.light/dark.background
 
   // Estados y detalles
   activeTab: "#E30613", // Rojo principal
@@ -142,6 +145,6 @@ export const CandidatesUIColors = {
 
 // Exportar tipos para TypeScript
 export type ColorScheme = keyof typeof Colors;
-export type ColorName = keyof typeof Colors.light;
+export type ColorName = Exclude<keyof typeof Colors.light, "gradient">;
 export type AuthorityColorType = keyof typeof AuthorityColors;
 export type CandidatesUIColorType = keyof typeof CandidatesUIColors;

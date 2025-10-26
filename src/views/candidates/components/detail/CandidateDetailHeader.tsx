@@ -1,17 +1,28 @@
 import { CandidatesUIColors } from "@/constants/Colors";
+import { useThemeColor } from "@/hooks/useThemeColor";
+import { Candidate } from "@/views/candidates/data/parties";
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface CandidateDetailHeaderProps {
-  candidateName: string;
+  candidate: Candidate;
   onBackPress: () => void;
 }
 
 export const CandidateDetailHeader: React.FC<CandidateDetailHeaderProps> = ({
-  candidateName,
+  candidate,
   onBackPress,
 }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const textColor = useThemeColor("text");
+  const textSecondaryColor = useThemeColor("textSecondary");
+  const primaryColor = useThemeColor("primary");
+
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   return (
     <>
       {/* Imagen de fondo con botón de regreso */}
@@ -40,12 +51,37 @@ export const CandidateDetailHeader: React.FC<CandidateDetailHeaderProps> = ({
 
       {/* Información del candidato */}
       <View style={styles.infoContainer}>
-        <Text style={styles.candidateName}>{candidateName}</Text>
-        <Text style={{lineHeight:20}}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora esse consectetur animi eos sint doloribus numquam id, suscipit rem pariatur reiciendis expedita, atque harum debitis temporibus nihil eius, quas non?
+        <Text style={[styles.candidateName, { color: textColor }]}>
+          {candidate.name}
+        </Text>
+        <Text style={[styles.position, { color: primaryColor }]}>
+          {candidate.position}
+        </Text>
+        <Text style={[styles.party, { color: textSecondaryColor }]}>
+          Partido: {candidate.party}
         </Text>
 
+        {/* Bio con funcionalidad de expandir/contraer */}
+        <View style={styles.bioContainer}>
+          <Text
+            style={[styles.bio, { color: textSecondaryColor }]}
+            numberOfLines={isExpanded ? undefined : 4}
+            ellipsizeMode="tail"
+          >
+            {candidate.bio}
+          </Text>
 
+          {candidate.bio && candidate.bio.length > 200 && (
+            <TouchableOpacity
+              onPress={toggleExpanded}
+              style={styles.readMoreButton}
+            >
+              <Text style={styles.readMoreText}>
+                {isExpanded ? "Ver menos" : "Seguir leyendo"}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
     </>
   );
@@ -90,10 +126,40 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   candidateName: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: "bold",
     marginVertical: 4,
     color: CandidatesUIColors.textPrimary,
+  },
+  position: {
+    fontSize: 16,
+    color: CandidatesUIColors.activeTab,
+    fontWeight: "600",
+    marginBottom: 4,
+  },
+  party: {
+    fontSize: 14,
+    color: CandidatesUIColors.textSecondary,
+    fontWeight: "500",
+    marginBottom: 8,
+  },
+  bioContainer: {
+    marginTop: 8,
+  },
+  bio: {
+    fontSize: 14,
+    color: CandidatesUIColors.textSecondary,
+    lineHeight: 20,
+    textAlign: "justify",
+  },
+  readMoreButton: {
+    marginTop: 8,
+    alignSelf: "flex-start",
+  },
+  readMoreText: {
+    fontSize: 14,
+    color: "#5FD0CF",
+    fontWeight: "600",
   },
   username: {
     fontSize: 14,

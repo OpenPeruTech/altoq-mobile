@@ -1,4 +1,4 @@
-import { CandidatesUIColors } from "@/constants/Colors";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { TextInput, View } from "react-native";
@@ -12,29 +12,39 @@ interface SearchBarProps {
 export const SearchBar: React.FC<SearchBarProps> = ({
   value,
   onChangeText,
-  placeholder = "¿Estas buscando algún candidato?",
+  placeholder = "¿Estás buscando algo en particular?",
 }) => {
-  return (
-    <View style={{ backgroundColor: CandidatesUIColors.cardBackground }} className="w-full flex items-center mt-6 mb-4">
+  const backgroundColor = useThemeColor("background");
+  const primary = useThemeColor("primary");
+  const textColor = useThemeColor("text");
+  const textSecondaryColor = useThemeColor("textSecondary");
+  const counterBackgroundColor = useThemeColor("counterBackground");
 
-      <View className="flex-row items-center bg-white px-4 py-2
-       rounded-3xl shadow-sm  w-3/4"
-       style={{ borderColor: "#e0e0e0" , borderWidth: 1 }}
-       >
-        <Ionicons
-          name="search"
-          size={20}
-          color="#000"
-        />
+  return (
+    <View
+      style={{ backgroundColor: backgroundColor }}
+      className="w-full flex items-center mt-6 mb-4"
+    >
+      <View
+        className="flex-row items-center bg-white px-4 py-2 shadow-sm w-11/12"
+        style={{
+          borderRadius: 15,
+          borderColor: primary,
+          borderWidth: 1,
+          backgroundColor: counterBackgroundColor,
+        }}
+      >
+        <Ionicons name="search" size={20} color="#000" />
         <TextInput
-          className="flex-1 ml-10 py-2 text-sm text-gray-800 "
+          className="flex-1 ml-3 py-2"
+          style={{ fontSize: 13, color: textColor }}
           placeholder={placeholder}
-          placeholderTextColor="#999"
+          placeholderTextColor={textSecondaryColor}
           value={value}
           onChangeText={onChangeText}
+          numberOfLines={1}
         />
       </View>
     </View>
-
   );
 };

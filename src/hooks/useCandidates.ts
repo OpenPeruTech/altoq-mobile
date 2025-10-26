@@ -1,20 +1,19 @@
-import { COLLECTIONS } from "@/services/firebase/collections";
-import { PopularCandidate } from "@/services/firebase/types";
 import { useMemo } from "react";
-import { useFirestore } from "./useFirestore";
+import { useStaticData } from "./useStaticData";
 
 /**
  * Hook para obtener los candidatos populares (Home Screen)
  */
 export function usePopularCandidates() {
-  const { data, loading, error } = useFirestore<PopularCandidate>(
-    COLLECTIONS.CANDIDATES
-  );
+  const { data, loading, error } = useStaticData();
 
-  // Ordenar por el campo 'order'
+  // Obtener candidatos populares y ordenar por el campo 'order'
   const sortedData = useMemo(() => {
-    return [...data].sort((a, b) => (a.order || 0) - (b.order || 0));
-  }, [data]);
+    if (!data?.popularCandidates) return [];
+    return [...data.popularCandidates].sort(
+      (a, b) => (a.order || 0) - (b.order || 0)
+    );
+  }, [data?.popularCandidates]);
 
   return { candidates: sortedData, loading, error };
 }
