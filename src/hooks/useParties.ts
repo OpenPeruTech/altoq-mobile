@@ -1,19 +1,19 @@
-import { COLLECTIONS } from "@/services/firebase/collections";
-import { Candidate, MainCandidate, Party } from "@/services/firebase/types";
 import { useMemo } from "react";
-import { useFirestore } from "./useFirestore";
+import { useStaticData } from "./useStaticData";
 
 /**
  * Hook para obtener todos los partidos políticos
  */
 export function useParties() {
-  const { data, loading, error } = useFirestore<Party>(COLLECTIONS.PARTIES);
+  const { data, loading, error } = useStaticData();
 
   // Agrupar partidos por filas
   const partiesByRow = useMemo(() => {
-    const grouped: { [row: number]: Party[] } = {};
+    if (!data?.parties) return {};
 
-    data.forEach((party) => {
+    const grouped: { [row: number]: any[] } = {};
+
+    data.parties.forEach((party) => {
       if (!grouped[party.row]) {
         grouped[party.row] = [];
       }
@@ -28,7 +28,7 @@ export function useParties() {
     });
 
     return grouped;
-  }, [data]);
+  }, [data?.parties]);
 
   // Extraer filas individuales para facilitar el acceso
   const firstRowParties = partiesByRow[1] || [];
@@ -37,7 +37,7 @@ export function useParties() {
   const fourthRowParties = partiesByRow[4] || [];
 
   return {
-    allParties: data,
+    allParties: data?.parties || [],
     partiesByRow,
     firstRowParties,
     secondRowParties,
@@ -52,12 +52,31 @@ export function useParties() {
  * Hook para obtener candidatos por partido
  */
 export function usePartyCandidates(partyName: string | null) {
-  const { data, loading, error } = useFirestore<Candidate>("party-candidates");
+  const { data, loading, error } = useStaticData();
 
   const filteredCandidates = useMemo(() => {
-    if (!partyName) return [];
-    return data.filter((candidate) => candidate.party === partyName);
-  }, [data, partyName]);
+    console.log("usePartyCandidates - partyName:", partyName);
+    console.log(
+      "usePartyCandidates - data?.candidates:",
+      data?.candidates?.length
+    );
+
+    if (!partyName || !data?.candidates) {
+      console.log("usePartyCandidates - No partyName or candidates data");
+      return [];
+    }
+
+    const filtered = data.candidates.filter(
+      (candidate) => candidate.party === partyName
+    );
+    console.log("usePartyCandidates - filtered candidates:", filtered.length);
+    console.log(
+      "usePartyCandidates - all parties in data:",
+      data.candidates.map((c) => c.party)
+    );
+
+    return filtered;
+  }, [data?.candidates, partyName]);
 
   return { candidates: filteredCandidates, loading, error };
 }
@@ -66,14 +85,15 @@ export function usePartyCandidates(partyName: string | null) {
  * Hook para obtener candidatos principales destacados
  */
 export function useMainCandidates() {
-  const { data, loading, error } = useFirestore<MainCandidate>(
-    COLLECTIONS.MAIN_CANDIDATES
-  );
+  const { data, loading, error } = useStaticData();
 
   // Ordenar por el campo 'order'
   const sortedData = useMemo(() => {
-    return [...data].sort((a, b) => (a.order || 0) - (b.order || 0));
-  }, [data]);
+    if (!data?.mainCandidates) return [];
+    return [...data.mainCandidates].sort(
+      (a, b) => (a.order || 0) - (b.order || 0)
+    );
+  }, [data?.mainCandidates]);
 
   return { mainCandidates: sortedData, loading, error };
 }

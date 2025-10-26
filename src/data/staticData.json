@@ -1,0 +1,1157 @@
+{
+  "filterOptions": [
+    {
+      "id": "1",
+      "name": "Lima",
+      "type": "region"
+    },
+    {
+      "id": "2",
+      "name": "Arequipa",
+      "type": "region"
+    },
+    {
+      "id": "3",
+      "name": "Cusco",
+      "type": "region"
+    },
+    {
+      "id": "4",
+      "name": "La Libertad",
+      "type": "region"
+    },
+    {
+      "id": "5",
+      "name": "Lambayeque",
+      "type": "region"
+    },
+    {
+      "id": "6",
+      "name": "Piura",
+      "type": "region"
+    }
+  ],
+  "authorities": [
+    {
+      "id": "1",
+      "title": "Presidente",
+      "icon": "person",
+      "count": 1,
+      "colorKey": "president",
+      "color": "#FF6B35",
+      "order": 1
+    },
+    {
+      "id": "2",
+      "title": "Vicepresidentes",
+      "icon": "people",
+      "count": 2,
+      "colorKey": "vicePresident",
+      "color": "#4ECDC4",
+      "order": 2
+    },
+    {
+      "id": "3",
+      "title": "Congresistas",
+      "icon": "people-circle",
+      "count": 130,
+      "colorKey": "senator",
+      "color": "#45B7D1",
+      "order": 3
+    },
+    {
+      "id": "4",
+      "title": "Parlamentarios Andinos",
+      "icon": "library",
+      "count": 5,
+      "colorKey": "andeanParliament",
+      "color": "#96CEB4",
+      "order": 4
+    }
+  ],
+  "popularCandidates": [
+    {
+      "id": "1",
+      "name": "Keiko Fujimori",
+      "party": "Fuerza Popular",
+      "percentage": 25.3,
+      "details": "Líder de Fuerza Popular, ex candidata presidencial. Experiencia en política y gestión pública.",
+      "color": "#0033a0",
+      "order": 1,
+      "experience": "Ex congresista",
+      "age": 48,
+      "region": "Lima"
+    },
+    {
+      "id": "2",
+      "name": "Rafael López Aliaga",
+      "party": "Renovación Popular",
+      "percentage": 18.7,
+      "details": "Alcalde de Lima, empresario. Líder empresarial con experiencia en gestión municipal.",
+      "color": "#ffcc00",
+      "order": 2,
+      "experience": "Alcalde de Lima",
+      "age": 52,
+      "region": "Lima"
+    },
+    {
+      "id": "3",
+      "name": "Verónika Mendoza",
+      "party": "Nuevo Perú",
+      "percentage": 15.2,
+      "details": "Ex candidata presidencial, ex congresista. Líder progresista con amplia experiencia parlamentaria.",
+      "color": "#d32f2f",
+      "order": 3,
+      "experience": "Ex congresista",
+      "age": 44,
+      "region": "Cusco"
+    },
+    {
+      "id": "4",
+      "name": "Hernando de Soto",
+      "party": "Avanza País",
+      "percentage": 12.8,
+      "details": "Economista, ex candidato presidencial. Reconocido economista con propuestas de desarrollo.",
+      "color": "#2E7D32",
+      "order": 4,
+      "experience": "Economista",
+      "age": 81,
+      "region": "Lima"
+    },
+    {
+      "id": "5",
+      "name": "Yonhy Lescano",
+      "party": "Acción Popular",
+      "percentage": 10.5,
+      "details": "Ex congresista, abogado. Experiencia en derecho y gestión parlamentaria.",
+      "color": "#1976D2",
+      "order": 5,
+      "experience": "Ex congresista",
+      "age": 65,
+      "region": "Arequipa"
+    }
+  ],
+  "parties": [
+    {
+      "id": "1",
+      "name": "Fuerza Popular",
+      "type": "icon",
+      "icon": "FP",
+      "color": "#0033a0",
+      "row": 1,
+      "position": 1
+    },
+    {
+      "id": "2",
+      "name": "Renovación Popular",
+      "type": "icon",
+      "icon": "RP",
+      "color": "#ffcc00",
+      "row": 1,
+      "position": 2
+    },
+    {
+      "id": "3",
+      "name": "Nuevo Perú",
+      "type": "icon",
+      "icon": "NP",
+      "color": "#d32f2f",
+      "row": 1,
+      "position": 3
+    },
+    {
+      "id": "4",
+      "name": "Avanza País",
+      "type": "icon",
+      "icon": "AP",
+      "color": "#2E7D32",
+      "row": 1,
+      "position": 4
+    },
+    {
+      "id": "25",
+      "name": "Perú Democrático",
+      "type": "icon",
+      "icon": "PD",
+      "color": "#FF6B35",
+      "row": 1,
+      "position": 5
+    },
+    {
+      "id": "26",
+      "name": "Fuerza Social",
+      "type": "icon",
+      "icon": "FS",
+      "color": "#4ECDC4",
+      "row": 1,
+      "position": 6
+    },
+    {
+      "id": "27",
+      "name": "Movimiento Verde",
+      "type": "icon",
+      "icon": "MV",
+      "color": "#45B7D1",
+      "row": 1,
+      "position": 7
+    },
+    {
+      "id": "28",
+      "name": "Partido Progresista",
+      "type": "icon",
+      "icon": "PP",
+      "color": "#96CEB4",
+      "row": 1,
+      "position": 8
+    },
+    {
+      "id": "5",
+      "name": "Acción Popular",
+      "type": "icon",
+      "icon": "AP",
+      "color": "#1976D2",
+      "row": 2,
+      "position": 1
+    },
+    {
+      "id": "6",
+      "name": "Perú Libre",
+      "type": "icon",
+      "icon": "PL",
+      "color": "#E91E63",
+      "row": 2,
+      "position": 2
+    },
+    {
+      "id": "7",
+      "name": "Podemos Perú",
+      "type": "icon",
+      "icon": "PP",
+      "color": "#9C27B0",
+      "row": 2,
+      "position": 3
+    },
+    {
+      "id": "8",
+      "name": "Somos Perú",
+      "type": "icon",
+      "icon": "SP",
+      "color": "#FF5722",
+      "row": 2,
+      "position": 4
+    },
+    {
+      "id": "9",
+      "name": "Alianza para el Progreso",
+      "type": "icon",
+      "icon": "APP",
+      "color": "#FF9800",
+      "row": 3,
+      "position": 1
+    },
+    {
+      "id": "10",
+      "name": "Frente Amplio",
+      "type": "icon",
+      "icon": "FA",
+      "color": "#795548",
+      "row": 3,
+      "position": 2
+    },
+    {
+      "id": "11",
+      "name": "Unión por el Perú",
+      "type": "icon",
+      "icon": "UPP",
+      "color": "#607D8B",
+      "row": 3,
+      "position": 3
+    },
+    {
+      "id": "12",
+      "name": "Partido Morado",
+      "type": "icon",
+      "icon": "PM",
+      "color": "#673AB7",
+      "row": 3,
+      "position": 4
+    },
+    {
+      "id": "13",
+      "name": "Contigo",
+      "type": "icon",
+      "icon": "CT",
+      "color": "#4CAF50",
+      "row": 4,
+      "position": 1
+    },
+    {
+      "id": "14",
+      "name": "Victoria Nacional",
+      "type": "icon",
+      "icon": "VN",
+      "color": "#FF6B35",
+      "row": 4,
+      "position": 2
+    },
+    {
+      "id": "15",
+      "name": "Juntos por el Perú",
+      "type": "icon",
+      "icon": "JP",
+      "color": "#8BC34A",
+      "row": 4,
+      "position": 3
+    },
+    {
+      "id": "16",
+      "name": "Democracia Directa",
+      "type": "icon",
+      "icon": "DD",
+      "color": "#3F51B5",
+      "row": 4,
+      "position": 4
+    },
+    {
+      "id": "17",
+      "name": "Partido Nacionalista Peruano",
+      "type": "icon",
+      "icon": "PNP",
+      "color": "#FF5722",
+      "row": 1,
+      "position": 5
+    },
+    {
+      "id": "18",
+      "name": "Solidaridad Nacional",
+      "type": "icon",
+      "icon": "SN",
+      "color": "#9C27B0",
+      "row": 1,
+      "position": 6
+    },
+    {
+      "id": "19",
+      "name": "Perú Posible",
+      "type": "icon",
+      "icon": "PP",
+      "color": "#607D8B",
+      "row": 2,
+      "position": 5
+    },
+    {
+      "id": "20",
+      "name": "Cambio 90",
+      "type": "icon",
+      "icon": "C90",
+      "color": "#795548",
+      "row": 2,
+      "position": 6
+    },
+    {
+      "id": "21",
+      "name": "Unidad Nacional",
+      "type": "icon",
+      "icon": "UN",
+      "color": "#E91E63",
+      "row": 3,
+      "position": 5
+    },
+    {
+      "id": "22",
+      "name": "Restauración Nacional",
+      "type": "icon",
+      "icon": "RN",
+      "color": "#FF9800",
+      "row": 3,
+      "position": 6
+    },
+    {
+      "id": "23",
+      "name": "Perú Patria Segura",
+      "type": "icon",
+      "icon": "PPS",
+      "color": "#4CAF50",
+      "row": 4,
+      "position": 5
+    },
+    {
+      "id": "24",
+      "name": "Frente Esperanza",
+      "type": "icon",
+      "icon": "FE",
+      "color": "#2196F3",
+      "row": 4,
+      "position": 6
+    }
+  ],
+  "mainCandidates": [
+    {
+      "id": "1",
+      "name": "Keiko Fujimori",
+      "party": "Fuerza Popular",
+      "partyId": "1",
+      "description": "Líder de Fuerza Popular, ex candidata presidencial en 2011 y 2016",
+      "image": "https://i.pravatar.cc/300?img=63",
+      "order": 1
+    },
+    {
+      "id": "2",
+      "name": "Rafael López Aliaga",
+      "party": "Renovación Popular",
+      "partyId": "2",
+      "description": "Alcalde de Lima desde 2019, empresario y político",
+      "image": "https://i.pravatar.cc/300?img=63",
+      "order": 2
+    },
+    {
+      "id": "3",
+      "name": "Verónika Mendoza",
+      "party": "Nuevo Perú",
+      "partyId": "3",
+      "description": "Ex candidata presidencial 2021, ex congresista",
+      "image": "https://i.pravatar.cc/300?img=63",
+      "order": 3
+    },
+    {
+      "id": "4",
+      "name": "Hernando de Soto",
+      "party": "Avanza País",
+      "partyId": "4",
+      "description": "Economista reconocido internacionalmente",
+      "image": "https://i.pravatar.cc/300?img=63",
+      "order": 4
+    },
+    {
+      "id": "5",
+      "name": "Yonhy Lescano",
+      "party": "Acción Popular",
+      "partyId": "5",
+      "description": "Ex congresista, abogado",
+      "image": "https://i.pravatar.cc/300?img=63",
+      "order": 5
+    },
+    {
+      "id": "6",
+      "name": "Pedro Castillo",
+      "party": "Perú Libre",
+      "partyId": "6",
+      "description": "Ex presidente, profesor",
+      "image": "https://i.pravatar.cc/300?img=58",
+      "order": 6
+    },
+    {
+      "id": "7",
+      "name": "José Vega",
+      "party": "Podemos Perú",
+      "partyId": "7",
+      "description": "Congresista, líder de Podemos Perú",
+      "image": "https://i.pravatar.cc/300?img=63",
+      "order": 7
+    },
+    {
+      "id": "8",
+      "name": "Daniel Salaverry",
+      "party": "Somos Perú",
+      "partyId": "8",
+      "description": "Ex congresista, ex presidente del Congreso",
+      "image": "https://i.pravatar.cc/300?img=58",
+      "order": 8
+    },
+    {
+      "id": "9",
+      "name": "Luis Zelada",
+      "party": "Alianza para el Progreso",
+      "partyId": "9",
+      "description": "Ex congresista, ex presidente del Congreso",
+      "image": "https://i.pravatar.cc/300?img=63",
+      "order": 9
+    },
+    {
+      "id": "10",
+      "name": "Fernando Zavala",
+      "party": "Frente Amplio",
+      "partyId": "10",
+      "description": "Ex congresista, ex presidente del Congreso",
+      "image": "https://i.pravatar.cc/300?img=68",
+      "order": 10
+    }
+  ],
+  "candidates": [
+    {
+      "id": "1",
+      "name": "Keiko Fujimori",
+      "party": "Fuerza Popular",
+      "partyId": "1",
+      "position": "Candidata Presidencial",
+      "bio": "Política peruana nacida en Lima en 1975. Hija del expresidente Alberto Fujimori, estudió Administración de Empresas en la Universidad de Boston. Líder de Fuerza Popular desde 2010, ha sido candidata presidencial en tres oportunidades (2011, 2016, 2021), llegando a segunda vuelta en todas ellas. Su partido ha mantenido una importante bancada en el Congreso durante varios períodos.",
+      "proposals": [
+        "Implementar el Sistema Nacional de Seguridad Ciudadana con 24/7 de patrullaje",
+        "Crear 1 millón de empleos formales a través de incentivos fiscales a empresas",
+        "Reforma educativa con énfasis en matemáticas, ciencias y tecnología",
+        "Comisión Nacional Anticorrupción con poderes especiales de investigación",
+        "Programa 'Perú Limpio' para gestión integral de residuos sólidos",
+        "Construcción de 50,000 viviendas sociales con servicios básicos completos"
+      ],
+      "timeline": [
+        {
+          "year": 2010,
+          "title": "Liderazgo en Fuerza Popular",
+          "description": "Asume la presidencia del partido Fuerza Popular tras la captura de su padre"
+        },
+        {
+          "year": 2011,
+          "title": "Primera candidatura presidencial",
+          "description": "Candidata a la presidencia, obtiene 23.5% en primera vuelta, pierde en segunda vuelta contra Ollanta Humala"
+        },
+        {
+          "year": 2016,
+          "title": "Segunda candidatura presidencial",
+          "description": "Nueva candidatura presidencial, obtiene 39.9% en segunda vuelta, pierde contra Pedro Pablo Kuczynski"
+        },
+        {
+          "year": 2021,
+          "title": "Tercera candidatura presidencial",
+          "description": "Candidata presidencial, obtiene 13.4% en primera vuelta, no pasa a segunda vuelta"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Rafael López Aliaga",
+      "party": "Renovación Popular",
+      "partyId": "2",
+      "position": "Alcalde de Lima",
+      "bio": "Empresario y político peruano nacido en Lima en 1961. Graduado en Ingeniería Industrial, fundó el Grupo Aliaga con inversiones en minería, construcción y retail. Alcalde de Lima desde 2019, ha implementado el Metropolitano y mejorado la gestión de residuos. Fundador del partido Renovación Popular en 2018, se presenta como candidato presidencial con un discurso de mano dura y valores tradicionales.",
+      "proposals": [
+        "Implementar el 'Plan Lima Verde' con 1 millón de árboles plantados en 5 años",
+        "Construir 3 líneas adicionales del Metro de Lima con inversión privada",
+        "Sistema de videovigilancia con 10,000 cámaras en toda la capital",
+        "Programa 'Lima Limpia' con recolección diferenciada y reciclaje obligatorio",
+        "Crear 100,000 empleos temporales en obras públicas y mantenimiento",
+        "Implementar el 'Bono Lima' de S/200 para familias vulnerables"
+      ],
+      "timeline": [
+        {
+          "year": 2018,
+          "title": "Fundación de Renovación Popular",
+          "description": "Crea el partido político Renovación Popular con enfoque en valores tradicionales y mano dura"
+        },
+        {
+          "year": 2019,
+          "title": "Elección como Alcalde de Lima",
+          "description": "Gana las elecciones municipales de Lima con 37.4% de votos, derrotando a Jorge Muñoz"
+        },
+        {
+          "year": 2021,
+          "title": "Candidatura presidencial",
+          "description": "Participa en las elecciones presidenciales obteniendo 0.4% de votos en primera vuelta"
+        },
+        {
+          "year": 2022,
+          "title": "Gestión municipal",
+          "description": "Implementa mejoras en transporte público y gestión de residuos en Lima"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Verónika Mendoza",
+      "party": "Nuevo Perú",
+      "partyId": "3",
+      "position": "Ex Congresista",
+      "bio": "Política y socióloga peruana nacida en Cusco en 1980. Estudió Sociología en la Universidad Nacional de San Antonio Abad del Cusco y tiene una maestría en Estudios Latinoamericanos. Ex congresista por Cusco (2011-2016), se caracteriza por su defensa de los derechos indígenas y el medio ambiente. Líder de Nuevo Perú, partido de izquierda que promueve la reforma constitucional y la descentralización.",
+      "proposals": [
+        "Asamblea Constituyente para redactar una nueva Constitución Política",
+        "Descentralización efectiva con transferencia de competencias a gobiernos regionales",
+        "Ley de Consulta Previa obligatoria para proyectos extractivos",
+        "Paridad de género en todos los niveles de gobierno y empresas públicas",
+        "Programa 'Perú Sostenible' con inversión en energías renovables",
+        "Reforma agraria integral con titulación de tierras comunales"
+      ],
+      "timeline": [
+        {
+          "year": 2011,
+          "title": "Elección como Congresista",
+          "description": "Elegida congresista por Cusco con 15.2% de votos, representando a Frente Amplio"
+        },
+        {
+          "year": 2016,
+          "title": "Candidatura presidencial",
+          "description": "Primera candidatura a la presidencia obteniendo 18.7% en primera vuelta"
+        },
+        {
+          "year": 2021,
+          "title": "Segunda candidatura presidencial",
+          "description": "Nueva candidatura presidencial obteniendo 7.8% en primera vuelta"
+        },
+        {
+          "year": 2022,
+          "title": "Liderazgo en Nuevo Perú",
+          "description": "Consolida su liderazgo en el partido Nuevo Perú tras la salida de Gregorio Santos"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Hernando de Soto",
+      "party": "Avanza País",
+      "partyId": "4",
+      "position": "Economista",
+      "bio": "Economista peruano nacido en Arequipa en 1941, reconocido internacionalmente por sus teorías sobre desarrollo económico. Fundador del Instituto Libertad y Democracia (ILD), ha asesorado a más de 30 países en reformas económicas. Autor de 'El Otro Sendero' y 'El Misterio del Capital', ha sido candidato presidencial en dos oportunidades. Su enfoque se centra en la formalización de la economía y el desarrollo de la propiedad privada.",
+      "proposals": [
+        "Programa Nacional de Formalización con registro simplificado de empresas",
+        "Sistema de Títulos de Propiedad para 2 millones de predios informales",
+        "Reforma tributaria con tasa única del 15% para empresas formales",
+        "Banco de Desarrollo Rural con créditos a 2% de interés anual",
+        "Centros de Innovación Tecnológica en cada región del país",
+        "Programa 'Perú Digital' con conectividad gratuita en zonas rurales"
+      ],
+      "timeline": [
+        {
+          "year": 1990,
+          "title": "Asesor presidencial",
+          "description": "Asesor del presidente Alberto Fujimori en reformas económicas y formalización"
+        },
+        {
+          "year": 2001,
+          "title": "Candidatura presidencial",
+          "description": "Primera candidatura a la presidencia obteniendo 0.6% de votos"
+        },
+        {
+          "year": 2021,
+          "title": "Segunda candidatura presidencial",
+          "description": "Nueva candidatura presidencial obteniendo 2.3% de votos en primera vuelta"
+        },
+        {
+          "year": 2022,
+          "title": "Reconocimiento internacional",
+          "description": "Recibe el Premio Milton Friedman por su contribución al desarrollo económico"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Yonhy Lescano",
+      "party": "Acción Popular",
+      "partyId": "5",
+      "position": "Ex Congresista",
+      "bio": "Abogado y político peruano, ex congresista y ex candidato presidencial por Acción Popular.",
+      "proposals": [
+        "Fortalecimiento de las instituciones",
+        "Lucha contra la corrupción",
+        "Desarrollo regional",
+        "Seguridad jurídica"
+      ],
+      "timeline": [
+        {
+          "year": 2006,
+          "title": "Elección como Congresista",
+          "description": "Elegido congresista por Lima"
+        },
+        {
+          "year": 2011,
+          "title": "Reelección",
+          "description": "Reelegido como congresista"
+        },
+        {
+          "year": 2021,
+          "title": "Candidatura presidencial",
+          "description": "Candidato presidencial por Acción Popular"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Pedro Castillo",
+      "party": "Perú Libre",
+      "partyId": "6",
+      "position": "Ex Presidente",
+      "bio": "Profesor y político peruano, ex presidente de la República (2021-2022).",
+      "proposals": [
+        "Reforma constitucional",
+        "Nueva constitución",
+        "Reforma agraria",
+        "Educación pública gratuita"
+      ],
+      "timeline": [
+        {
+          "year": 2021,
+          "title": "Candidatura presidencial",
+          "description": "Candidato presidencial por Perú Libre"
+        },
+        {
+          "year": 2021,
+          "title": "Presidencia",
+          "description": "Asume la presidencia de la República"
+        },
+        {
+          "year": 2022,
+          "title": "Vacancia presidencial",
+          "description": "Vacado por el Congreso"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "name": "José Vega",
+      "party": "Podemos Perú",
+      "partyId": "7",
+      "position": "Congresista",
+      "bio": "Político peruano, congresista y líder de Podemos Perú.",
+      "proposals": [
+        "Modernización del Estado",
+        "Transparencia gubernamental",
+        "Desarrollo tecnológico",
+        "Empleo juvenil"
+      ],
+      "timeline": [
+        {
+          "year": 2020,
+          "title": "Fundación de Podemos Perú",
+          "description": "Crea el partido Podemos Perú"
+        },
+        {
+          "year": 2021,
+          "title": "Elección como Congresista",
+          "description": "Elegido congresista"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Daniel Salaverry",
+      "party": "Somos Perú",
+      "partyId": "8",
+      "position": "Ex Congresista",
+      "bio": "Político peruano, ex congresista y ex presidente del Congreso.",
+      "proposals": [
+        "Fortalecimiento del Congreso",
+        "Reforma política",
+        "Desarrollo económico",
+        "Seguridad ciudadana"
+      ],
+      "timeline": [
+        {
+          "year": 2016,
+          "title": "Elección como Congresista",
+          "description": "Elegido congresista por La Libertad"
+        },
+        {
+          "year": 2018,
+          "title": "Presidencia del Congreso",
+          "description": "Elegido presidente del Congreso"
+        },
+        {
+          "year": 2021,
+          "title": "Nueva elección",
+          "description": "Reelegido como congresista"
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Martín Vizcarra",
+      "party": "Contigo",
+      "partyId": "13",
+      "position": "Ex Presidente",
+      "bio": "Ingeniero civil peruano nacido en Lima en 1963. Graduado de la Universidad Nacional de Ingeniería, fue gobernador de Moquegua (2011-2014) donde implementó exitosos programas de desarrollo regional. Vicepresidente y presidente de la República (2018-2020), se caracterizó por su lucha anticorrupción y reforma política. Fundador del partido Contigo, busca una segunda oportunidad presidencial.",
+      "proposals": [
+        "Reforma Constitucional para eliminar la inmunidad parlamentaria",
+        "Sistema Nacional Anticorrupción con fiscalización independiente",
+        "Programa 'Perú Conectado' con 5,000 km de carreteras nuevas",
+        "Reforma del sistema de justicia con jueces elegidos por méritos",
+        "Ley de Transparencia Total con acceso público a información gubernamental",
+        "Programa 'Perú Limpio' con gestión integral de residuos en todo el país"
+      ],
+      "timeline": [
+        {
+          "year": 2011,
+          "title": "Gobernador de Moquegua",
+          "description": "Elegido gobernador regional de Moquegua con 45.2% de votos"
+        },
+        {
+          "year": 2016,
+          "title": "Vicepresidencia",
+          "description": "Elegido vicepresidente de la República en fórmula con Pedro Pablo Kuczynski"
+        },
+        {
+          "year": 2018,
+          "title": "Presidencia",
+          "description": "Asume la presidencia tras la renuncia de PPK por escándalos de corrupción"
+        },
+        {
+          "year": 2020,
+          "title": "Vacancia presidencial",
+          "description": "Vacado por el Congreso por 'incapacidad moral permanente'"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "name": "César Acuña",
+      "party": "Alianza para el Progreso",
+      "partyId": "9",
+      "position": "Ex Gobernador",
+      "bio": "Empresario y político peruano nacido en Trujillo en 1952. Fundador de la Universidad César Vallejo y del Grupo Educativo del Norte, ha invertido más de S/500 millones en educación superior. Ex gobernador de La Libertad (2007-2014), implementó programas de desarrollo regional exitosos. Líder de Alianza para el Progreso, partido que promueve el desarrollo empresarial y la educación.",
+      "proposals": [
+        "Programa 'Perú Educado' con 100 nuevas universidades públicas",
+        "Fondo de Desarrollo Regional con S/10,000 millones anuales",
+        "Ley de Fomento Empresarial con exoneraciones tributarias por 5 años",
+        "Construcción de 50,000 viviendas sociales con servicios completos",
+        "Programa 'Perú Productivo' con créditos a 1% de interés para MYPES",
+        "Sistema Nacional de Becas con 500,000 beneficiarios anuales"
+      ],
+      "timeline": [
+        {
+          "year": 2006,
+          "title": "Gobernador de La Libertad",
+          "description": "Elegido gobernador regional de La Libertad con 38.7% de votos"
+        },
+        {
+          "year": 2011,
+          "title": "Reelección",
+          "description": "Reelegido como gobernador regional con 52.3% de votos"
+        },
+        {
+          "year": 2016,
+          "title": "Candidatura presidencial",
+          "description": "Candidato presidencial por APP obteniendo 6.6% de votos en primera vuelta"
+        },
+        {
+          "year": 2022,
+          "title": "Expansión educativa",
+          "description": "Inaugura 5 nuevas sedes de la Universidad César Vallejo en el interior del país"
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "name": "Marco Arana",
+      "party": "Frente Amplio",
+      "partyId": "10",
+      "position": "Ex Congresista",
+      "bio": "Sacerdote católico y político peruano, ex congresista y líder del Frente Amplio.",
+      "proposals": [
+        "Protección ambiental",
+        "Derechos indígenas",
+        "Reforma agraria",
+        "Justicia social"
+      ],
+      "timeline": [
+        {
+          "year": 2011,
+          "title": "Elección como Congresista",
+          "description": "Elegido congresista por Cajamarca"
+        },
+        {
+          "year": 2016,
+          "title": "Candidatura presidencial",
+          "description": "Candidato presidencial por Frente Amplio"
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "name": "Julio Guzmán",
+      "party": "Partido Morado",
+      "partyId": "12",
+      "position": "Ex Candidato Presidencial",
+      "bio": "Economista y político peruano, ex candidato presidencial por el Partido Morado.",
+      "proposals": [
+        "Modernización del Estado",
+        "Reforma educativa",
+        "Desarrollo tecnológico",
+        "Transparencia gubernamental"
+      ],
+      "timeline": [
+        {
+          "year": 2016,
+          "title": "Candidatura presidencial",
+          "description": "Candidato presidencial por Partido Morado"
+        },
+        {
+          "year": 2021,
+          "title": "Segunda candidatura",
+          "description": "Nueva candidatura presidencial"
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "name": "Antauro Humala",
+      "party": "Unión por el Perú",
+      "partyId": "11",
+      "position": "Ex Militar",
+      "bio": "Ex militar y político peruano, hermano del expresidente Ollanta Humala.",
+      "proposals": [
+        "Reforma militar",
+        "Nacionalismo",
+        "Desarrollo rural",
+        "Soberanía nacional"
+      ],
+      "timeline": [
+        {
+          "year": 2005,
+          "title": "Levantamiento de Andahuaylas",
+          "description": "Lidera levantamiento militar"
+        },
+        {
+          "year": 2016,
+          "title": "Liberación",
+          "description": "Liberado de prisión"
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "name": "Daniel Urresti",
+      "party": "Victoria Nacional",
+      "partyId": "14",
+      "position": "Ex Ministro",
+      "bio": "Ex militar y político peruano, ex ministro del Interior y ex congresista.",
+      "proposals": [
+        "Seguridad ciudadana",
+        "Lucha contra el terrorismo",
+        "Reforma policial",
+        "Orden público"
+      ],
+      "timeline": [
+        {
+          "year": 2014,
+          "title": "Ministro del Interior",
+          "description": "Nombrado ministro del Interior"
+        },
+        {
+          "year": 2021,
+          "title": "Elección como Congresista",
+          "description": "Elegido congresista"
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "name": "Luis Castañeda",
+      "party": "Somos Perú",
+      "partyId": "8",
+      "position": "Ex Alcalde de Lima",
+      "bio": "Médico y político peruano, ex alcalde de Lima y ex candidato presidencial.",
+      "proposals": [
+        "Desarrollo urbano",
+        "Salud pública",
+        "Gestión municipal",
+        "Infraestructura urbana"
+      ],
+      "timeline": [
+        {
+          "year": 2002,
+          "title": "Alcalde de Lima",
+          "description": "Elegido alcalde de Lima"
+        },
+        {
+          "year": 2011,
+          "title": "Candidatura presidencial",
+          "description": "Candidato presidencial por Somos Perú"
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "name": "Ollanta Humala",
+      "party": "Perú Libre",
+      "partyId": "6",
+      "position": "Ex Presidente",
+      "bio": "Ex militar y político peruano, ex presidente de la República (2011-2016).",
+      "proposals": [
+        "Nacionalismo",
+        "Reforma agraria",
+        "Desarrollo rural",
+        "Soberanía nacional"
+      ],
+      "timeline": [
+        {
+          "year": 2006,
+          "title": "Primera candidatura presidencial",
+          "description": "Candidato presidencial, segunda vuelta"
+        },
+        {
+          "year": 2011,
+          "title": "Presidencia",
+          "description": "Elegido presidente de la República"
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "name": "Alan García",
+      "party": "Acción Popular",
+      "partyId": "5",
+      "position": "Ex Presidente",
+      "bio": "Abogado y político peruano, ex presidente de la República (1985-1990 y 2006-2011).",
+      "proposals": [
+        "Desarrollo económico",
+        "Reforma del Estado",
+        "Integración regional",
+        "Modernización del país"
+      ],
+      "timeline": [
+        {
+          "year": 1985,
+          "title": "Primera presidencia",
+          "description": "Elegido presidente por primera vez"
+        },
+        {
+          "year": 2006,
+          "title": "Segunda presidencia",
+          "description": "Reelegido presidente"
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "name": "Alejandro Toledo",
+      "party": "Juntos por el Perú",
+      "partyId": "15",
+      "position": "Ex Presidente",
+      "bio": "Economista y político peruano, ex presidente de la República (2001-2006).",
+      "proposals": [
+        "Desarrollo económico",
+        "Reforma del Estado",
+        "Integración internacional",
+        "Modernización"
+      ],
+      "timeline": [
+        {
+          "year": 2001,
+          "title": "Presidencia",
+          "description": "Elegido presidente de la República"
+        },
+        {
+          "year": 2006,
+          "title": "Fin de mandato",
+          "description": "Entrega el poder a Alan García"
+        }
+      ]
+    },
+    {
+      "id": "19",
+      "name": "Lourdes Flores",
+      "party": "Fuerza Popular",
+      "partyId": "1",
+      "position": "Ex Congresista",
+      "bio": "Abogada y política peruana, ex congresista y ex candidata presidencial.",
+      "proposals": [
+        "Derechos de la mujer",
+        "Reforma judicial",
+        "Desarrollo social",
+        "Fortalecimiento democrático"
+      ],
+      "timeline": [
+        {
+          "year": 2001,
+          "title": "Candidatura presidencial",
+          "description": "Candidata presidencial por Unidad Nacional"
+        },
+        {
+          "year": 2006,
+          "title": "Segunda candidatura",
+          "description": "Nueva candidatura presidencial"
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "name": "Martha Chávez",
+      "party": "Fuerza Popular",
+      "partyId": "1",
+      "position": "Ex Congresista",
+      "bio": "Abogada y política peruana, ex congresista y ex presidenta del Congreso.",
+      "proposals": [
+        "Reforma constitucional",
+        "Fortalecimiento del Congreso",
+        "Desarrollo legislativo",
+        "Democracia parlamentaria"
+      ],
+      "timeline": [
+        {
+          "year": 1995,
+          "title": "Elección como Congresista",
+          "description": "Elegida congresista"
+        },
+        {
+          "year": 2000,
+          "title": "Presidencia del Congreso",
+          "description": "Elegida presidenta del Congreso"
+        }
+      ]
+    }
+  ],
+  "electionInfo": {
+    "infoCards": [
+      {
+        "title": "Que hace un presidente",
+        "description": "Etapa en la que los partidos deben inscribirse para poder participar en las elecciones generales de 2026."
+      },
+      {
+        "title": "Que pasa si no voto?",
+        "description": "Los partidos presentan sus listas de candidatos al JNE para su evaluación y validación."
+      },
+      {
+        "title": "Que es la segunda vuelta?",
+        "description": "Periodo destinado a la exposición de planes de gobierno, debates y participación ciudadana."
+      }
+    ],
+    "electionEvents": [
+      {
+        "title": "Inscripción de candidatos en curso",
+        "date": "2026-03-14",
+        "color": "#20C6C6",
+        "icon": "checkmark-circle-outline",
+        "titleIcon": "document-text-outline"
+      },
+      {
+        "title": "Publicación del padrón electoral",
+        "date": "2026-04-11",
+        "color": "#1565C0",
+        "icon": "checkmark-circle-outline",
+        "titleIcon": "list-circle-outline"
+      },
+      {
+        "title": "Día de elecciones (1ra vuelta)",
+        "date": "2026-04-12",
+        "color": "#FBC02D",
+        "icon": "checkmark-circle-outline",
+        "titleIcon": "file-tray-full-outline"
+      },
+      {
+        "title": "Día de elecciones (2da vuelta)",
+        "date": "2026-06-07",
+        "color": "#26A69A",
+        "icon": "checkmark-circle-outline",
+        "titleIcon": "checkmark-done-outline"
+      }
+    ],
+    "electionDates": {
+      "today": "2026-03-21",
+      "primeraVuelta": "2026-04-05",
+      "segundaVuelta": "2026-05-24",
+      "name": "Elecciones generales 2026"
+    }
+  },
+  "candidateAnalysis": {
+    "positiveAspects": [
+      "Experiencia política sólida",
+      "Propuestas específicas y cuantificadas",
+      "Conocimiento del sector público y privado",
+      "Liderazgo reconocido en su partido político",
+      "Compromiso con la transparencia y lucha anticorrupción"
+    ],
+    "considerations": [
+      "Necesidad de mayor experiencia en gestión gubernamental",
+      "Desafíos en la implementación de propuestas ambiciosas",
+      "Requiere consenso político para reformas estructurales",
+      "Presupuesto limitado para todas las propuestas",
+      "Dependencia de factores externos (economía global, pandemia)"
+    ]
+  }
+}

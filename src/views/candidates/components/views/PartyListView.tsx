@@ -1,8 +1,9 @@
-import { CandidatesUIColors } from "@/constants/Colors";
+import { CandidatesUIColors, Colors } from "@/constants/Colors";
 import { usePartyCandidates } from "@/hooks";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import { Candidate } from "@/views/candidates/data/parties";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StatusBar, StyleSheet, useColorScheme, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Loading } from "@/components";
@@ -28,19 +29,47 @@ export const PartyListView: React.FC<PartyListViewProps> = ({
   const { candidates: partyCandidates, loading } =
     usePartyCandidates(selectedParty);
 
+  const backgroundColor = useThemeColor("background");
+
+  // 🎨 Colores del gradiente
+  const colorScheme = useColorScheme();
+  const theme = colorScheme === "dark" ? "dark" : "light";
+  const gradientColors = Colors[theme].gradient;
+  const gradientBackgroundColor = gradientColors[0];
+
   return (
     <>
       <Loading visible={loading} message="Cargando datos..." />
-      <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
-        <HeaderWithBack title={selectedParty} onBackPress={onBackPress} />
-        <CandidatesList
-          candidates={partyCandidates}
-          partyName={selectedParty}
-          searchText={searchText}
-          onSearchChange={onSearchChange}
-          onCandidatePress={onCandidatePress}
+      <View style={[styles.container, { backgroundColor }]}>
+        <StatusBar
+          barStyle={"light-content"}
+          backgroundColor={gradientBackgroundColor}
         />
-      </SafeAreaView>
+
+        {/* Barra superior del sistema con color específico */}
+        <SafeAreaView
+          edges={["top"]}
+          style={{ backgroundColor: gradientBackgroundColor }}
+        />
+
+        <View
+          style={{ backgroundColor: gradientBackgroundColor, height: 20 }}
+        />
+
+        <SafeAreaView
+          style={[styles.container, { backgroundColor }]}
+          edges={["bottom"]}
+        >
+          <HeaderWithBack title={selectedParty} onBackPress={onBackPress} />
+          <CandidatesList
+            candidates={partyCandidates}
+            partyName={selectedParty}
+            searchText={searchText}
+            onSearchChange={onSearchChange}
+            onCandidatePress={onCandidatePress}
+          />
+        </SafeAreaView>
+      </View>
     </>
   );
 };
@@ -48,7 +77,6 @@ export const PartyListView: React.FC<PartyListViewProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: CandidatesUIColors.screenBackground,
   },
   loadingContainer: {
     flex: 1,

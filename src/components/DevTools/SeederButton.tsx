@@ -1,7 +1,7 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { runAllSeeders } from "@/services/firebase/seeders";
 import React, { useState } from "react";
-import { ActivityIndicator, Alert, Pressable, Text, View } from "react-native";
+import { Alert, View } from "react-native";
 
 /**
  * Componente de desarrollo para ejecutar los seeders
@@ -58,7 +58,7 @@ export function SeederButton() {
   if (__DEV__) {
     return (
       <View className="absolute bottom-20 right-5 z-50">
-        <Pressable
+        {/* <Pressable
           onPress={handleSeed}
           disabled={isSeeding}
           className="px-4 py-3 rounded-full shadow-lg"
@@ -72,7 +72,7 @@ export function SeederButton() {
           ) : (
             <Text className="text-white font-bold text-xs">🌱 Seed DB</Text>
           )}
-        </Pressable>
+        </Pressable> */}
       </View>
     );
   }

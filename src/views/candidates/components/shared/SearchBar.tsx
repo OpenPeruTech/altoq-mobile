@@ -1,7 +1,7 @@
-import { CandidatesUIColors } from "@/constants/Colors";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { TextInput, View } from "react-native";
 
 interface SearchBarProps {
   value: string;
@@ -12,52 +12,39 @@ interface SearchBarProps {
 export const SearchBar: React.FC<SearchBarProps> = ({
   value,
   onChangeText,
-  placeholder = "¿Estas buscando algún candidato?",
+  placeholder = "¿Estás buscando algo en particular?",
 }) => {
+  const backgroundColor = useThemeColor("background");
+  const primary = useThemeColor("primary");
+  const textColor = useThemeColor("text");
+  const textSecondaryColor = useThemeColor("textSecondary");
+  const counterBackgroundColor = useThemeColor("counterBackground");
+
   return (
-    <View style={styles.searchContainer}>
-      <Ionicons
-        name="search"
-        size={20}
-        color="#999"
-        style={styles.searchIcon}
-      />
-      <TextInput
-        style={styles.searchInput}
-        placeholder={placeholder}
-        placeholderTextColor="#999"
-        value={value}
-        onChangeText={onChangeText}
-      />
+    <View
+      style={{ backgroundColor: backgroundColor }}
+      className="w-full flex items-center mt-6 mb-4"
+    >
+      <View
+        className="flex-row items-center bg-white px-4 py-2 shadow-sm w-11/12"
+        style={{
+          borderRadius: 15,
+          borderColor: primary,
+          borderWidth: 1,
+          backgroundColor: counterBackgroundColor,
+        }}
+      >
+        <Ionicons name="search" size={20} color="#000" />
+        <TextInput
+          className="flex-1 ml-3 py-2"
+          style={{ fontSize: 13, color: textColor }}
+          placeholder={placeholder}
+          placeholderTextColor={textSecondaryColor}
+          value={value}
+          onChangeText={onChangeText}
+          numberOfLines={1}
+        />
+      </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: CandidatesUIColors.cardBackground,
-    marginTop: 20,
-    marginBottom: 10,
-    paddingHorizontal: 16,
-    borderRadius: 25,
-    shadowColor: CandidatesUIColors.cardShadow,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-    width: "90%",
-    maxWidth: 400,
-    alignSelf: "center",
-  },
-  searchIcon: {
-    marginRight: 10,
-  },
-  searchInput: {
-    flex: 1,
-    paddingVertical: 12,
-    fontSize: 14,
-    color: CandidatesUIColors.textPrimary,
-  },
-});

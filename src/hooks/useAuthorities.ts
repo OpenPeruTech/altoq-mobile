@@ -1,20 +1,19 @@
-import { COLLECTIONS } from "@/services/firebase/collections";
-import { Authority } from "@/services/firebase/types";
 import { useMemo } from "react";
-import { useFirestore } from "./useFirestore";
+import { useStaticData } from "./useStaticData";
 
 /**
  * Hook para obtener las autoridades políticas
  */
 export function useAuthorities() {
-  const { data, loading, error } = useFirestore<Authority>(
-    COLLECTIONS.AUTHORITIES
-  );
+  const { data, loading, error } = useStaticData();
 
   // Ordenar por el campo 'order'
   const sortedData = useMemo(() => {
-    return [...data].sort((a, b) => (a.order || 0) - (b.order || 0));
-  }, [data]);
+    if (!data?.authorities) return [];
+    return [...data.authorities].sort(
+      (a, b) => (a.order || 0) - (b.order || 0)
+    );
+  }, [data?.authorities]);
 
   return { authorities: sortedData, loading, error };
 }

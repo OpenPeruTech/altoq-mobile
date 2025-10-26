@@ -1,15 +1,24 @@
-import { CandidatesUIColors } from "@/constants/Colors";
+import { CandidatesUIColors, Colors } from "@/constants/Colors";
 import { useMainCandidates, useParties } from "@/hooks";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import { MainCandidate } from "@/views/candidates/data/parties";
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Loading } from "@/components";
-import { MainCandidates } from "../list";
-import { FivePartyRow, ThreePartyRow } from "../party";
+import { LinearGradient } from "expo-linear-gradient";
 import { SearchBar } from "../shared";
-
 interface PartiesMainViewProps {
   searchText: string;
   onSearchChange: (text: string) => void;
@@ -24,17 +33,18 @@ export const PartiesMainView: React.FC<PartiesMainViewProps> = ({
   onMainCandidatePress,
 }) => {
   // Obtener datos de Firebase
-  const {
-    firstRowParties,
-    secondRowParties,
-    thirdRowParties,
-    fourthRowParties,
-    loading: partiesLoading,
-  } = useParties();
+  const { firstRowParties, loading: partiesLoading } = useParties();
 
   const { mainCandidates, loading: candidatesLoading } = useMainCandidates();
-
-  // const isLoading = partiesLoading || candidatesLoading;
+  const backgroundColor = useThemeColor("background");
+  const textColor = useThemeColor("text");
+  const textSecondaryColor = useThemeColor("textSecondary");
+  const primary = useThemeColor("primary");
+  const counterBackgroundColor = useThemeColor("counterBackground");
+  const colorScheme = useColorScheme();
+  const theme = colorScheme === "dark" ? "dark" : "light";
+  const gradientColors = Colors[theme].gradient;
+  const gradientBackgroundColor = gradientColors[0];
 
   return (
     <>
@@ -42,63 +52,228 @@ export const PartiesMainView: React.FC<PartiesMainViewProps> = ({
         visible={partiesLoading || candidatesLoading}
         message="Cargando datos..."
       />
-      <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
-        {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Lista De Candidatos</Text>
-        </View>
+      <View style={[styles.container, { backgroundColor }]}>
+        <StatusBar
+          barStyle={"light-content"}
+          backgroundColor={gradientBackgroundColor}
+        />
 
-        <ScrollView
-          style={styles.scrollView}
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+        <SafeAreaView
+          edges={["top"]}
+          style={{ backgroundColor: gradientBackgroundColor }}
+        />
+
+        <View
+          style={{ backgroundColor: gradientBackgroundColor, height: 20 }}
+        />
+
+        <SafeAreaView
+          style={[styles.container, { backgroundColor }]}
+          edges={["bottom"]}
         >
-          {/* Search Bar */}
-          <SearchBar value={searchText} onChangeText={onSearchChange} />
+          {/* Header */}
+          <LinearGradient
+            colors={gradientColors}
+            start={{ x: 1, y: -1 }}
+            end={{ x: 0, y: 1 }}
+            style={{
+              paddingTop: 32,
+              paddingBottom: 24,
+              borderBottomLeftRadius: 15,
+              borderBottomRightRadius: 15,
+            }}
+          >
+            <Text className="text-white text-2xl font-bold text-center">
+              Lista De Partidos
+            </Text>
+          </LinearGradient>
+          <ScrollView
+            className="flex-1 px-4"
+            contentContainerStyle={styles.scrollContent}
+            showsVerticalScrollIndicator={false}
+            style={{ maxHeight: "50%" }}
+          >
+            <SearchBar value={searchText} onChangeText={onSearchChange} />
+            <View className="flex-row flex-wrap justify-between p-3">
+              {firstRowParties.map((item) => (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={() => {
+                    console.log("PartiesMainView - Party pressed:", item.name);
+                    onPartyPress(item.name);
+                  }}
+                  className="items-center justify-center p-3 mb-3 shadow-sm"
+                  style={{
+                    overflow: "hidden",
+                    borderWidth: 1,
+                    borderColor: "#E5E7EB",
+                    borderRadius: 16,
+                    backgroundColor: counterBackgroundColor,
+                    width: "31%",
+                    minHeight: 110,
+                  }}
+                >
+                  {/* Estrellita en la esquina superior derecha */}
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: 6,
+                      right: 6,
+                      zIndex: 1,
+                    }}
+                  >
+                    <Ionicons name="star" size={14} color={primary} />
+                  </View>
 
-          {/* Primera fila - 5 partidos con fotos */}
-          {firstRowParties.length > 0 && (
-            <FivePartyRow
-              parties={firstRowParties}
-              onPartyPress={onPartyPress}
-            />
-          )}
+                  {/* Icono del partido arriba */}
+                  <View
+                    className="rounded-full items-center justify-center mb-2"
+                    style={{
+                      backgroundColor: item.color || "#F59E0B",
+                      marginBottom: 6,
+                      width: 56,
+                      height: 56,
+                    }}
+                  >
+                    <Text
+                      className="font-bold"
+                      style={{ color: "#FFFFFF", fontSize: 18 }}
+                    >
+                      {item.icon}
+                    </Text>
+                  </View>
 
-          {/* Segunda fila - 3 partidos estilo home */}
-          {secondRowParties.length > 0 && (
-            <ThreePartyRow
-              parties={secondRowParties}
-              onPartyPress={onPartyPress}
-            />
-          )}
+                  {/* Nombre del partido abajo */}
+                  <Text
+                    className="font-semibold text-xs text-center"
+                    numberOfLines={2}
+                    style={{ color: textColor }}
+                    ellipsizeMode="tail"
+                  >
+                    {item.name}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </ScrollView>
+          <View
+            className="px-5 py-3 pb-20"
+            style={{ backgroundColor: backgroundColor }}
+          >
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              className="mt-1"
+              contentContainerStyle={{ paddingHorizontal: 16 }}
+            >
+              {mainCandidates.map((candidate, index) => (
+                <TouchableOpacity
+                  key={candidate.id || index}
+                  onPress={() => {
+                    console.log(
+                      "PartiesMainView - Popular party pressed:",
+                      candidate.party
+                    );
+                    onPartyPress(candidate.party);
+                  }}
+                  className="mb-4 mr-4 rounded-lg overflow-hidden"
+                  style={{
+                    width: 260,
+                    height: 200,
+                    backgroundColor: counterBackgroundColor,
+                    borderRadius: 16,
+                    borderWidth: 1,
+                    borderColor: "#E5E7EB",
+                  }}
+                >
+                  {/* Imagen en la parte superior - ocupa más de la mitad */}
+                  <View
+                    style={{
+                      height: 100,
+                      backgroundColor: candidate.color || primary + "20",
+                      borderTopLeftRadius: 16,
+                      borderTopRightRadius: 16,
+                      overflow: "hidden",
+                    }}
+                  >
+                    {candidate.image ? (
+                      <Image
+                        source={{
+                          uri: candidate.image,
+                          cache: "force-cache",
+                        }}
+                        style={{ width: "100%", height: "100%" }}
+                        resizeMode="cover"
+                        onError={(error) => {
+                          console.log("Error cargando imagen:", candidate.name);
+                        }}
+                      />
+                    ) : (
+                      <View
+                        className="w-full h-full items-center justify-center"
+                        style={{ backgroundColor: candidate.color || primary }}
+                      >
+                        <Text
+                          className="text-4xl"
+                          style={{ color: "#FFFFFF", fontWeight: "bold" }}
+                        >
+                          {candidate.name.charAt(0)}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
 
-          {/* Tercera fila - 5 partidos con fotos */}
-          {thirdRowParties.length > 0 && (
-            <FivePartyRow
-              parties={thirdRowParties}
-              onPartyPress={onPartyPress}
-            />
-          )}
+                  {/* Contenido debajo de la imagen */}
+                  <View className="p-3">
+                    {/* Nombre del partido */}
+                    <Text
+                      className="text-base font-bold mb-1"
+                      style={{ color: textColor }}
+                      numberOfLines={1}
+                    >
+                      {candidate.party}
+                    </Text>
 
-          {/* Cuarta fila - 3 partidos estilo home */}
-          {fourthRowParties.length > 0 && (
-            <ThreePartyRow
-              parties={fourthRowParties}
-              onPartyPress={onPartyPress}
-            />
-          )}
+                    {/* Descripción del partido */}
+                    <Text
+                      className="text-xs mb-2"
+                      style={{ color: textSecondaryColor }}
+                      numberOfLines={2}
+                      ellipsizeMode="tail"
+                    >
+                      {candidate.description}
+                    </Text>
 
-          {/* Main Candidates */}
-          {mainCandidates.length > 0 && (
-            <MainCandidates
-              candidates={mainCandidates}
-              onCandidatePress={onMainCandidatePress}
-            />
-          )}
-
-          <View style={styles.bottomSpacing} />
-        </ScrollView>
-      </SafeAreaView>
+                    {/* Botón Ver candidatos */}
+                    <TouchableOpacity
+                      className="flex-row items-center justify-end"
+                      onPress={() => {
+                        console.log(
+                          "PartiesMainView - Ver candidatos pressed:",
+                          candidate.party
+                        );
+                        onPartyPress(candidate.party);
+                      }}
+                    >
+                      <Text
+                        className="text-xs font-semibold mr-2"
+                        style={{ color: primary }}
+                      >
+                        Ver candidatos
+                      </Text>
+                      <Ionicons
+                        name="arrow-forward"
+                        size={14}
+                        color={primary}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        </SafeAreaView>
+      </View>
     </>
   );
 };
@@ -106,7 +281,6 @@ export const PartiesMainView: React.FC<PartiesMainViewProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: CandidatesUIColors.screenBackground,
   },
   header: {
     backgroundColor: CandidatesUIColors.headerBackground,
@@ -122,14 +296,12 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: CandidatesUIColors.headerText,
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
     flex: 1,
   },
-  scrollView: {
-    flex: 1,
-  },
+
   scrollContent: {
     alignItems: "center",
   },

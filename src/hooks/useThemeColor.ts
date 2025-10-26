@@ -4,6 +4,7 @@
  */
 
 import { ColorName, Colors, ColorScheme } from "@/constants/Colors";
+import { useColorScheme } from "react-native";
 
 /**
  * Hook principal para obtener colores del tema actual
@@ -11,8 +12,9 @@ import { ColorName, Colors, ColorScheme } from "@/constants/Colors";
  * @returns El color correspondiente al tema actual
  */
 export function useThemeColor(colorName: ColorName): string {
-  // Forzar tema claro temporalmente
-  const theme = "light" as ColorScheme;
+  // Detectar el esquema de color del sistema
+  const colorScheme = useColorScheme();
+  const theme: ColorScheme = colorScheme === "dark" ? "dark" : "light";
   return Colors[theme][colorName];
 }
 
@@ -24,7 +26,8 @@ export function useThemeColor(colorName: ColorName): string {
 export function useThemeColors(
   colorNames: ColorName[]
 ): Record<string, string> {
-  const theme = "light" as ColorScheme;
+  const colorScheme = useColorScheme();
+  const theme: ColorScheme = colorScheme === "dark" ? "dark" : "light";
   const themeColors = Colors[theme];
 
   const result: Record<string, string> = {};
@@ -41,7 +44,8 @@ export function useThemeColors(
  * @returns Todos los colores del tema actual
  */
 export function useAllThemeColors() {
-  const theme = "light" as ColorScheme;
+  const colorScheme = useColorScheme();
+  const theme: ColorScheme = colorScheme === "dark" ? "dark" : "light";
   return Colors[theme];
 }
 
@@ -55,7 +59,8 @@ export function useThemeColorWithFallback(
   props: { light?: string; dark?: string },
   colorName: ColorName
 ) {
-  const theme = "light" as ColorScheme;
+  const colorScheme = useColorScheme();
+  const theme: ColorScheme = colorScheme === "dark" ? "dark" : "light";
   const colorFromProps = props[theme];
 
   if (colorFromProps) {

@@ -1,34 +1,36 @@
-import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
+import { Candidate } from "@/views/candidates/data/parties";
 
-export const TimelineView: React.FC = () => {
+interface TimelineViewProps {
+  candidate: Candidate;
+}
+
+export const TimelineView: React.FC<TimelineViewProps> = ({ candidate }) => {
   return (
-    <>
-      <View className="items-center px-20">
-        <Text className="font-bold text-xl">Línea del Tiempo</Text>
-      </View>
-
-      <View className="justify-center items-center p-4 border border-gray-300 rounded-lg m-4 w-11/12">
-        {/* Lista de eventos */}
-        <View>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <View key={item} className="flex-row items-center mb-2">
-              <Text className="text-gray-700">{item}. Lorem ipsum</Text>
+    <View style={{ padding: 20 }}>
+      <Text className="font-bold text-xl text-start mb-4" style={{marginVertical:8, marginHorizontal:2}}>
+        Trayectoria Política
+      </Text>
+      
+      {candidate.timeline?.map((event, index) => (
+        <View key={index} className="mb-4 p-4 bg-gray-50 rounded-lg">
+          <View className="flex-row items-start">
+            <View className="w-3 h-3 bg-blue-500 rounded-full mt-2 mr-3" />
+            <View className="flex-1">
+              <Text className="font-bold text-lg text-blue-600 mb-1">
+                {event.year}
+              </Text>
+              <Text className="font-semibold text-base text-gray-800 mb-2">
+                {event.title}
+              </Text>
+              <Text className="text-gray-600 text-sm leading-5">
+                {event.description}
+              </Text>
             </View>
-          ))}
+          </View>
         </View>
-
-        {/* Navegación */}
-        <View className="flex-row justify-between w-20 mt-4">
-          <TouchableOpacity>
-            <Ionicons name="chevron-back" size={24} color="#999" />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Ionicons name="chevron-forward" size={24} color="#999" />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </>
+      ))}
+    </View>
   );
 };

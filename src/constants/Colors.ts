@@ -5,7 +5,7 @@
  */
 
 // Colores principales de la marca YoElijo
-const primaryBrand = "#E30613"; // Rojo principal
+const primaryBrand = "#5FD0CF"; // Rojo principal
 const secondaryBrand = "#141CFF"; // Azul secundario
 const accentBrand = "#F8D9DD"; // Rosa claro para highlights
 
@@ -21,6 +21,8 @@ export const Colors = {
     textSecondary: "#687076",
     textTertiary: "#A3A3A3",
     textOnPrimary: "#FFFFFF",
+    textOnboarding: "#5FD0CF",
+    backgroundOnboardingOne: "#20244B",
 
     // Colores de fondo
     background: "#FFFFFF",
@@ -34,6 +36,8 @@ export const Colors = {
     tabIconSelected: primaryBrand,
     tabBarBackground: "#FFFFFF",
     tabBarBorder: "#E5E7EB",
+    gradient: ["#5FD0CF", "#306A69"] as const,
+    counterBackground: "#FFFFFF",
 
     // Colores de estado
     success: "#22C55E",
@@ -56,10 +60,12 @@ export const Colors = {
     text: "#FFFFFF",
     textSecondary: "#9BA1A6",
     textTertiary: "#6B7280",
-    textOnPrimary: "#FFFFFF",
+    textOnPrimary: "#5FD0CF",
+    textOnboarding: "#5FD0CF",
+    backgroundOnboardingOne: "#20244B",
 
     // Colores de fondo
-    background: "#1F2937", // Más claro que el negro actual
+    background: "#20244B", // Fondo principal en modo oscuro
     backgroundSecondary: "#374151",
     surface: "#4B5563",
 
@@ -70,6 +76,8 @@ export const Colors = {
     tabIconSelected: primaryBrand,
     tabBarBackground: "#1F2937",
     tabBarBorder: "#374151",
+    gradient: ["#292E65", "#292E65"] as const,
+    counterBackground: "#30377C",
 
     // Colores de estado
     success: "#22C55E",
@@ -116,12 +124,12 @@ export const CandidatesUIColors = {
   textSecondary: "#666",
   textTertiary: "#999",
 
-  // Fondos
-  screenBackground: "#f8f9fa",
+  // Fondos (se reemplaza por Colors.light/dark.background)
+  screenBackground: "#f8f9fa", // Deprecated: usar Colors.light/dark.background
 
   // Estados y detalles
   activeTab: "#E30613", // Rojo principal
-  inactiveTab: "#666",
+  inactiveTab: "#A7A9A8",
   tabBorder: "#eee",
   badgeBackground: "#F8D9DD", // Rosa claro para badges
 
@@ -137,6 +145,6 @@ export const CandidatesUIColors = {
 
 // Exportar tipos para TypeScript
 export type ColorScheme = keyof typeof Colors;
-export type ColorName = keyof typeof Colors.light;
+export type ColorName = Exclude<keyof typeof Colors.light, "gradient">;
 export type AuthorityColorType = keyof typeof AuthorityColors;
 export type CandidatesUIColorType = keyof typeof CandidatesUIColors;
