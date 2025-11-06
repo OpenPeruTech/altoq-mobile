@@ -1,0 +1,17 @@
+[00:00:01.427] Server  LOG      ✓ Ready in 881ms
+[00:00:26.535] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:26.703] Browser LOG     Service Worker registrado
+[00:00:35.275] Browser LOG     Service Worker registrado
+[00:00:41.367] Browser LOG     handleNext called, currentStep: 0 totalSteps: 3
+[00:00:41.367] Browser LOG     Moving to step: 1
+[00:00:41.367] Browser LOG     Moving to step: 1
+[00:00:42.021] Browser LOG     handleNext called, currentStep: 1 totalSteps: 3
+[00:00:42.021] Browser LOG     Moving to step: 2
+[00:00:42.021] Browser LOG     Moving to step: 2
+[00:00:42.836] Browser LOG     handleNext called, currentStep: 2 totalSteps: 3
+[00:00:42.836] Browser LOG     Completing splash
+[00:00:49.363] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:49.511] Browser LOG     Service Worker registrado
+[00:00:49.628] Browser LOG      App lista para instalar
+[00:00:51.803] Browser LOG      Usuario rechazó la instalación
+[00:00:51.803] Browser LOG      App lista para instalar

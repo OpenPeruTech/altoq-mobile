@@ -1,14 +1,11 @@
 {
-  "name": "yoelijo",
-  "main": "expo-router/entry",
+  "name": "altoq",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start",
-    "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "lint": "expo lint"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "lucide-react": "^0.552.0",
@@ -24,7 +21,7 @@
     "@types/react-dom": "^19",
     "@types/web-push": "^3.6.4",
     "eslint": "^9",
-    "eslint-config-next": "16.0.1",
+    "eslint-config": "^9",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
