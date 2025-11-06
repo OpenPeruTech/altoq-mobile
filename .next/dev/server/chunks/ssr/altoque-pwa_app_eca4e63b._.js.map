@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/LENOVO/Desktop/altoque-pwa/app/icon0.svg.mjs%20%28structured%20image%20object%29"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 1000, height: 1000 }\n"],"names":[],"mappings":";;;;AAAA;;uCACe;IAAE,KAAA,mJAAG;IAAE,OAAO;IAAM,QAAQ;AAAK","debugId":null}}]
-}

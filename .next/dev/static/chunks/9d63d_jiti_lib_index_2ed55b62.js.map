@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/LENOVO/Desktop/altoque-pwa/node_modules/.pnpm/jiti%401.21.7/node_modules/jiti/lib/index.js"],"sourcesContent":["function onError(err) {\n  throw err; /* ↓ Check stack trace ↓ */\n}\n\nmodule.exports = function jiti(filename, opts) {\n  const jiti = require(\"../dist/jiti\");\n\n  opts = { onError, ...opts };\n\n  if (!opts.transform) {\n    opts.transform = require(\"../dist/babel\");\n  }\n\n  return jiti(filename, opts);\n};\n"],"names":[],"mappings":"AAAA,SAAS,QAAQ,GAAG;IAClB,MAAM,KAAK,yBAAyB;AACtC;AAEA,OAAO,OAAO,GAAG,SAAS,KAAK,QAAQ,EAAE,IAAI;IAC3C,MAAM;IAEN,OAAO;QAAE;QAAS,GAAG,IAAI;IAAC;IAE1B,IAAI,CAAC,KAAK,SAAS,EAAE;QACnB,KAAK,SAAS;IAChB;IAEA,OAAO,KAAK,UAAU;AACxB","ignoreList":[0],"debugId":null}}]
-}
