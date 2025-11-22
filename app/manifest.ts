@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Altoque",
+    name: "Altoq",
     short_name: "Altoq",
     description: "App para informarte sobre las elecciones presidenciales",
     start_url: "/",
@@ -12,15 +12,21 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: "portrait-primary",
     icons: [
       {
-        src: "/web-app-manifest-192x192.png",
+        src: "/icons/icon-192x192.png",
         sizes: "192x192",
         type: "image/png",
+        purpose: "maskable",
       },
       {
-        src: "/web-app-manifest-512x512.png",
+        src: "/icons/icon-512x512.png",
         sizes: "512x512",
         type: "image/png",
+        purpose: "maskable",
       },
     ],
+    categories: ["news", "education", "politics"],
+    lang: "es-PE",
+    dir: "ltr",
+    prefer_related_applications: false,
   };
 }
